@@ -8,3 +8,6 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Gymix"
 include ':app'
+include ':Domain'
+include ':Data'
+include ':Presentation'
