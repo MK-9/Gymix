@@ -1,17 +1,20 @@
 package com.gymix.data.repository
 
+import com.gymix.data.network.services.ForkifyService
 import com.gymix.domain.entity.Foods
-import com.gymix.domain.entity.Recipe
-import com.gymix.domain.entity.Result
+import com.gymix.domain.entity.RecipeResponse
 import com.gymix.domain.repository.FoodForkRepository
 import io.reactivex.rxjava3.core.Single
+import javax.inject.Inject
 
-class DefaultFoodForkRepository : FoodForkRepository {
-    override fun getFoodRecipe(query: String): Single<Result<Recipe>> {
-        TODO("Not yet implemented")
+class DefaultFoodForkRepository @Inject constructor(private val service: ForkifyService) :
+    FoodForkRepository {
+
+    override fun getFoodRecipe(recipeId: String): Single<RecipeResponse> {
+        return service.getFoodRecipe(recipeId)
     }
 
-    override fun searchFood(query: String): Single<Result<Foods>> {
-        TODO("Not yet implemented")
+    override fun searchFood(query: String): Single<Foods> {
+        return service.searchFood(query)
     }
 }

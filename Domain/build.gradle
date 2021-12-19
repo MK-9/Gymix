@@ -1,6 +1,9 @@
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -41,7 +44,12 @@ dependencies {
     //retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
+    implementation 'com.google.code.gson:gson:2.8.9'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    //hilt
+    implementation 'com.google.dagger:hilt-android:2.38.1'
+    kapt 'com.google.dagger:hilt-android-compiler:2.38.1'
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.0'

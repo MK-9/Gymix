@@ -1,12 +1,11 @@
 package com.gymix.domain.repository
 
-import com.gymix.domain.entity.Recipe
 import com.gymix.domain.entity.Foods
-import com.gymix.domain.entity.Result
+import com.gymix.domain.entity.RecipeResponse
 import io.reactivex.rxjava3.core.Single
 
 interface FoodForkRepository {
-    fun getFoodRecipe(query: String): Single<Result<Recipe>>
+    fun getFoodRecipe(recipeId: String): Single<RecipeResponse>
 
-    fun searchFood(query: String): Single<Result<Foods>>
+    fun searchFood(query: String): Single<Foods>
 }
