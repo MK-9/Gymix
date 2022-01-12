@@ -10,9 +10,8 @@ import io.reactivex.rxjava3.core.Single
 class GetNotesInteractor(val repository: NoteRepository) : GetNotesUseCase {
 
     override fun invoke(noteOrder: NoteOrder): Single<List<Note>> {
-        repository.getNotes().map { notes ->
+        return repository.getNotes().map { notes ->
             when (noteOrder.orderType) {
-
                 //ascending order
                 is OrderType.ascending -> {
                     when (noteOrder) {
