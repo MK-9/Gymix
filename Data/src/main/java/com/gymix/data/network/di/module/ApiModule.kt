@@ -19,7 +19,6 @@ import java.util.concurrent.TimeUnit
 @Module
 class ApiModule {
 
-    @ForkifyRetrofitQualifier
     @Provides
     fun provideForkifyRetrofit(
         @BaseUrlQualifier baseUrl: String, okHttpClient: OkHttpClient
