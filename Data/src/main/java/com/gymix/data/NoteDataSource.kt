@@ -1,12 +1,9 @@
-package com.gymix.domain.repository
+package com.gymix.data
 
 import com.gymix.domain.entity.Note
 import io.reactivex.rxjava3.core.Single
 
-/**
- * interface for accessing Data Layer
- */
-interface NoteRepository {
+interface NoteDataSource {
     fun getNotes(): Single<List<Note>>
 
     fun getNoteById(id: Int): Note?
