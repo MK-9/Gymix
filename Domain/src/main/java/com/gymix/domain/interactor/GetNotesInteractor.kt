@@ -6,8 +6,9 @@ import com.gymix.domain.useCase.GetNotesUseCase
 import com.gymix.domain.util.NoteOrder
 import com.gymix.domain.util.OrderType
 import io.reactivex.rxjava3.core.Single
+import javax.inject.Inject
 
-class GetNotesInteractor(val repository: NoteRepository) : GetNotesUseCase {
+class GetNotesInteractor @Inject constructor(val repository: NoteRepository) : GetNotesUseCase {
 
     override fun invoke(noteOrder: NoteOrder): Single<List<Note>> {
         return repository.getNotes().map { notes ->

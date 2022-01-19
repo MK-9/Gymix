@@ -15,10 +15,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class UseCasesModule {
-
-    @Binds
-    abstract fun provideNoteUseCases()
-
     @Binds
     abstract fun provideGetNoteUseCase(useCase: GetNoteInteractor): GetNoteUseCase
 
