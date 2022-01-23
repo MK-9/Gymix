@@ -14,7 +14,6 @@
             <option value="$PROJECT_DIR$/Data" />
             <option value="$PROJECT_DIR$/Domain" />
             <option value="$PROJECT_DIR$/Presentation" />
-            <option value="$PROJECT_DIR$/Ui" />
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>

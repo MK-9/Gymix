@@ -2,7 +2,7 @@ package com.gymix.domain.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.gymix.ui.theme.*
+//import com.gymix.ui.theme.*
 
 @Entity
 data class Note(
@@ -13,7 +13,7 @@ data class Note(
     @PrimaryKey val id: Int
 ) {
     companion object {
-        val noteColors = listOf(RedOrange, LightGreen, Violet, BabyBlue, RedPink)
+//        val noteColors = listOf(RedOrange, LightGreen, Violet, BabyBlue, RedPink)
     }
 }
 
