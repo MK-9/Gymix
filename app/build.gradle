@@ -35,10 +35,15 @@ android {
         jvmTarget = '11'
     }
 
-//    kapt {
-//        // Allow references to generated code
-//        correctErrorTypes = true
-//    }
+    buildFeatures {
+        dataBinding true
+        viewBinding true
+    }
+
+    //    kapt {
+    //        // Allow references to generated code
+    //        correctErrorTypes = true
+    //    }
 }
 
 dependencies {
