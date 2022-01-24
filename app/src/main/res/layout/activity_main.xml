@@ -14,27 +14,41 @@
             android:layout_height="?attr/actionBarSize"
             android:theme="@style/AppTheme.AppBarOverLay">
 
-
         </com.google.android.material.appbar.AppBarLayout>
 
-        <fragment
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/nav_host_fragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:defaultNavHost="true"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:navGraph="@navigation/bottom_nav_graph" />
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabAddNote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="@dimen/normal_100"
+            android:layout_marginBottom="@dimen/small_100"
+            android:contentDescription="@string/add_note"
+            android:src="@drawable/ic_add"
+            android:tint="@color/white"
+            app:layout_anchor="@id/bottom_navigation"
+            app:layout_anchorGravity="bottom|right|end"
+            app:layout_insetEdge="bottom" />
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_marginStart="0dp"
-            android:layout_marginEnd="0dp"
             android:background="?android:attr/windowBackground"
-            app:itemIconTint="@color/colorAccent"
-            app:labelVisibilityMode="unlabeled"
-            app:menu="@menu/navigation" />
+            app:itemIconTint="@color/black"
+            app:itemRippleColor="@color/purple_200"
+            app:labelVisibilityMode="labeled"
+            app:menu="@menu/menu_bottom_nav" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
