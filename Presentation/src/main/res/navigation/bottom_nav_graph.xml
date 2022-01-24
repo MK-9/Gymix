@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottom_nav_graph"
+    app:startDestination="@id/addNoteFragment">
+
+
+    <fragment
+        android:id="@+id/addNoteFragment"
+        android:name="com.gymix.presentation.AddNoteFragment"
+        android:label="AddNoteFragment" />
+    <fragment
+        android:id="@+id/editNoteFragment"
+        android:name="com.gymix.presentation.EditNoteFragment"
+        android:label="EditNoteFragment" />
+</navigation>
