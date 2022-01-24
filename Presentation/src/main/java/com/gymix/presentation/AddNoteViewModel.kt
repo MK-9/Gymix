@@ -6,7 +6,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class AddEditNoteViewModel @Inject constructor(val noteUseCases: AddNoteUseCase) : ViewModel() {
+class AddNoteViewModel @Inject constructor(val noteUseCases: AddNoteUseCase) : ViewModel() {
 
 
 }
