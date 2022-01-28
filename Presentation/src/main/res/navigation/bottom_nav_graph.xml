@@ -6,7 +6,7 @@
     
     <fragment
         android:id="@+id/addNoteFragment"
-        android:name="com.gymix.presentation.AddNoteFragment"
+        android:name="com.gymix.presentation.NoteFragment"
         android:label="AddNoteFragment" />
 
     <fragment

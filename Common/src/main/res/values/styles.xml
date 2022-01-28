@@ -87,4 +87,9 @@
         <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="android:textSize">10sp</item>
     </style>
+
+    <style name="ShapeAppearance.App.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">8dp</item>
+    </style>
 </resources>
