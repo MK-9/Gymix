@@ -9,6 +9,13 @@
         android:orientation="vertical"
         tools:context=".MainActivity">
 
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/myProgress"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/normal_100" />
+
         <Button
             android:id="@+id/start_btn"
             android:layout_width="wrap_content"
