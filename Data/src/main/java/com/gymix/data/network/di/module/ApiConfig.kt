@@ -27,6 +27,7 @@ class ApiConfig {
     companion object {
         const val READING_TIME = 2000L
         const val WRITING_TIME = 2000L
-        const val BASE_URL = "https://forkify-api.herokuapp.com/api/"
+        const val BASE_URL = "https://get.taaghche.com/"
+//        const val BASE_URL = "https://forkify-api.herokuapp.com/api/"
     }
 }
