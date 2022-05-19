@@ -17,6 +17,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -39,6 +41,10 @@ android {
 //        // Allow references to generated code
 //        correctErrorTypes = true
 //    }
+
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -46,6 +52,8 @@ dependencies {
     implementation project(path: ":Domain")
     implementation project(path: ":Presentation")
     implementation project(path: ":Common")
+
+    implementation 'androidx.multidex:multidex:2.0.1'
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.activity:activity-ktx:1.4.0'

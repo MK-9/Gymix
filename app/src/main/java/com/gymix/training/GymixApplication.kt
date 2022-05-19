@@ -1,10 +1,10 @@
 package com.gymix.training
 
-import android.app.Application
+import androidx.multidex.MultiDexApplication
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class GymixApplication : Application() {
+class GymixApplication : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
