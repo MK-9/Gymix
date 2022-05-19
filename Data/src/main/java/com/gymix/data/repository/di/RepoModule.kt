@@ -1,8 +1,8 @@
 package com.gymix.data.repository.di
 
-import com.gymix.data.NoteDataSource
-import com.gymix.data.repository.DefaultNoteRepository
-import com.gymix.domain.repository.NoteRepository
+import com.gymix.data.dto.BookDataSource
+import com.gymix.data.repository.DefaultBookRepository
+import com.gymix.domain.repository.BookRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,11 +15,8 @@ class RepoModule {
 
     @Provides
     @Singleton
-    fun provideNoteRepository(
-        noteLocalDataSource: NoteDataSource,
-        noteRemoteDataSource: NoteDataSource
-    ): NoteRepository {
-        return DefaultNoteRepository(noteLocalDataSource, noteRemoteDataSource)
+    fun provideBookRepository(bookDataSource: BookDataSource): BookRepository {
+        return DefaultBookRepository(bookDataSource)
     }
 
 }

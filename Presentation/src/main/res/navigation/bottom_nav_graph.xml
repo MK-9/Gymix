@@ -2,15 +2,15 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/bottom_nav_graph"
-    app:startDestination="@id/addNoteFragment">
-
+    app:startDestination="@id/home">
 
     <fragment
-        android:id="@+id/addNoteFragment"
-        android:name="com.gymix.presentation.AddNoteFragment"
-        android:label="AddNoteFragment" />
+        android:id="@+id/home"
+        android:name="com.gymix.presentation.book.BookListFragment"
+        android:label="home" />
+
     <fragment
-        android:id="@+id/editNoteFragment"
-        android:name="com.gymix.presentation.EditNoteFragment"
-        android:label="EditNoteFragment" />
+        android:id="@+id/bookMark"
+        android:name="com.gymix.presentation.book.BookListFragment"
+        android:label="bookMark" />
 </navigation>

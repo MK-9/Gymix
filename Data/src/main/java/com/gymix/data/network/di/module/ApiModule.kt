@@ -19,38 +19,35 @@ import java.util.concurrent.TimeUnit
 @Module
 class ApiModule {
 
+    @BookRetrofitQualifier
     @Provides
-    fun provideForkifyRetrofit(
+    fun provideBooksRetrofit(
         @BaseUrlQualifier baseUrl: String, okHttpClient: OkHttpClient
-    ): Retrofit {
-        return Retrofit.Builder()
-            .client(okHttpClient)
-            .baseUrl(baseUrl)
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-            .build()
-    }
+    ): Retrofit = Retrofit.Builder()
+        .client(okHttpClient)
+        .baseUrl(baseUrl)
+        .addConverterFactory(GsonConverterFactory.create())
+//        .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+        .build()
+
 
     @Provides
     fun provideOkHttp(
         @ReadingTimeQualifier readTimeout: Long,
         @WritingTimeQualifier writeTimeout: Long,
         @HttpLoggingInterceptorQualifier interceptor: Interceptor
-    ): OkHttpClient {
-        return OkHttpClient.Builder()
-            .readTimeout(readTimeout, TimeUnit.MILLISECONDS)
-            .writeTimeout(writeTimeout, TimeUnit.MILLISECONDS)
-            .callTimeout(writeTimeout, TimeUnit.MILLISECONDS)
-            .addInterceptor(interceptor)
-            .build()
-    }
+    ): OkHttpClient = OkHttpClient.Builder()
+        .readTimeout(readTimeout, TimeUnit.MILLISECONDS)
+        .writeTimeout(writeTimeout, TimeUnit.MILLISECONDS)
+        .callTimeout(writeTimeout, TimeUnit.MILLISECONDS)
+        .addInterceptor(interceptor)
+        .build()
 
     @HttpLoggingInterceptorQualifier
     @Provides
-    fun provideInterceptor(): Interceptor {
-        return HttpLoggingInterceptor().apply {
+    fun provideInterceptor(): Interceptor =
+        HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }
-    }
 
 }
