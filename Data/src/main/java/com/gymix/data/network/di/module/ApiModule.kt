@@ -27,7 +27,7 @@ class ApiModule {
         .client(okHttpClient)
         .baseUrl(baseUrl)
         .addConverterFactory(GsonConverterFactory.create())
-        .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+//        .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
         .build()
 
 

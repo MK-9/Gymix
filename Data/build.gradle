@@ -36,6 +36,7 @@ android {
 
 dependencies {
     implementation project(path: ':Domain')
+    implementation project(path: ':Common')
 
     //rxJava
     implementation 'io.reactivex.rxjava3:rxjava:3.0.7'
