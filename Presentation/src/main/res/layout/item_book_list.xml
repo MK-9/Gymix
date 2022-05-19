@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mcv_root"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/item_book_list_height"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="2dp"
+    app:cardPreventCornerOverlap="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_cover"
+            android:layout_width="56dp"
+            android:layout_height="72dp"
+            android:layout_margin="@dimen/normal_100"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_title"
+            style="@style/Text.Title.Style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/normal_100"
+            android:layout_marginRight="@dimen/normal_100"
+            android:text="فریفته تصادف"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/img_cover"
+            app:layout_constraintTop_toTopOf="@+id/img_cover" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtDescription"
+            style="@style/Text.Description.Style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/normal_100"
+            android:layout_marginRight="@dimen/normal_100"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="کتاب فریفته تصادف نوشتۀ نسیم نیکلاس طالب و ترجمۀ هانیه هژبرالساداتی است. انتشارات میلکان این کتاب را منتشر کرده است. کتاب، دربارۀ نقش پنهان شانس در زندگی و بازار است"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/img_cover"
+            app:layout_constraintTop_toBottomOf="@+id/txt_title" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</com.google.android.material.card.MaterialCardView>
