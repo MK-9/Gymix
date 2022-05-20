@@ -1,6 +1,6 @@
 package com.gymix.data.network.di.services
 
-import com.gymix.domain.entity.DomainBookResponse
+import com.gymix.domain.entities.DomainBookResponse
 import retrofit2.Response
 import retrofit2.http.GET
 

@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gymix.common.Result
-import com.gymix.domain.entity.DomainBook
+import com.gymix.domain.entities.DomainBook
 import com.gymix.domain.useCase.GetBookUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler

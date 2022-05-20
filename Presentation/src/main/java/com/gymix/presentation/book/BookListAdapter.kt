@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.gymix.domain.entity.DomainBook
+import com.gymix.domain.entities.DomainBook
 import com.gymix.presentation.databinding.ItemBookListBinding
 
 class BookListAdapter : ListAdapter<DomainBook, BookListAdapter.BookItemViewHolder>(BookItemDiffUtils()) {

@@ -1,6 +1,6 @@
 package com.gymix.domain.useCase
 
-import com.gymix.domain.entity.DomainBook
+import com.gymix.domain.entities.DomainBook
 import com.gymix.common.Result
 
 interface GetBookUseCase {

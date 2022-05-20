@@ -1,7 +1,7 @@
 package com.gymix.data.dto
 
 import com.gymix.data.network.di.services.IBookServices
-import com.gymix.domain.entity.DomainBookResponse
+import com.gymix.domain.entities.DomainBookResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response

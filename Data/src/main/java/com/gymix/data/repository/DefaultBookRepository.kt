@@ -3,7 +3,7 @@ package com.gymix.data.repository
 import com.gymix.data.dto.BookDataSource
 import com.gymix.domain.repository.BookRepository
 import com.gymix.common.Result
-import com.gymix.domain.entity.DomainBook
+import com.gymix.domain.entities.DomainBook
 
 class DefaultBookRepository(private val dataSource: BookDataSource) : BookRepository {
 

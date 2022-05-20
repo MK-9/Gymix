@@ -1,4 +1,4 @@
-package com.gymix.domain.entity
+package com.gymix.domain.entities
 
 data class DomainAuthor(
     val id: Long,

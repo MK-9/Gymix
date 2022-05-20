@@ -1,6 +1,6 @@
-package com.gymix.domain.entity
+package com.gymix.presentation.book.models
 
-data class DomainBook(
+data class Book(
     val id: Long,
     val title: String,
     val description: String,
@@ -9,6 +9,6 @@ data class DomainBook(
     val price: Long,
     val PhysicalPrice: Long,
     val rating: Float,
-    val authors: List<DomainAuthor>,
+    val authors: List<Author>,
     val numberOfPages: Int?
 )

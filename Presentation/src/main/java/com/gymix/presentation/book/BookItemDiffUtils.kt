@@ -1,7 +1,7 @@
 package com.gymix.presentation.book
 
 import androidx.recyclerview.widget.DiffUtil
-import com.gymix.domain.entity.DomainBook
+import com.gymix.domain.entities.DomainBook
 
 class BookItemDiffUtils : DiffUtil.ItemCallback<DomainBook>() {
     override fun areItemsTheSame(oldItem: DomainBook, newItem: DomainBook): Boolean {
