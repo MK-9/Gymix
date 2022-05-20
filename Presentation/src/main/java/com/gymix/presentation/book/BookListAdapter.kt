@@ -4,10 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.gymix.domain.entity.Book
+import com.gymix.domain.entity.DomainBook
 import com.gymix.presentation.databinding.ItemBookListBinding
 
-class BookListAdapter : ListAdapter<Book, BookListAdapter.BookItemViewHolder>(BookItemDiffUtils()) {
+class BookListAdapter : ListAdapter<DomainBook, BookListAdapter.BookItemViewHolder>(BookItemDiffUtils()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookItemViewHolder {
         val binding = ItemBookListBinding.inflate(
@@ -19,7 +19,7 @@ class BookListAdapter : ListAdapter<Book, BookListAdapter.BookItemViewHolder>(Bo
     }
 
     override fun onBindViewHolder(holder: BookItemViewHolder, position: Int) {
-        val book: Book? = getItem(position)
+        val book: DomainBook? = getItem(position)
         book?.run {
             holder.bind(book, position)
         }
@@ -32,7 +32,7 @@ class BookListAdapter : ListAdapter<Book, BookListAdapter.BookItemViewHolder>(Bo
     inner class BookItemViewHolder(private val binding: ItemBookListBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(book: Book, position: Int) {
+        fun bind(book: DomainBook, position: Int) {
             binding.txtTitle.text = book.title
             binding.txtDescription.text = book.description
         }

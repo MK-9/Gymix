@@ -1,6 +1,6 @@
 package com.gymix.domain.entity
 
-data class Author(
+data class DomainAuthor(
     val id: Long,
     val firstName: String,
     val lastName: String,

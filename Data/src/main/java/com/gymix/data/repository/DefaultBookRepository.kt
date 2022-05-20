@@ -1,13 +1,13 @@
 package com.gymix.data.repository
 
 import com.gymix.data.dto.BookDataSource
-import com.gymix.domain.entity.Book
 import com.gymix.domain.repository.BookRepository
 import com.gymix.common.Result
+import com.gymix.domain.entity.DomainBook
 
 class DefaultBookRepository(private val dataSource: BookDataSource) : BookRepository {
 
-    override suspend fun getBook(): Result<List<Book>> {
+    override suspend fun getBook(): Result<List<DomainBook>> {
         val response = dataSource.fetchBooks()
 
         if (response.isSuccessful) {
@@ -21,4 +21,8 @@ class DefaultBookRepository(private val dataSource: BookDataSource) : BookReposi
 
         return Result.OnError("error")
     }
+
+//    override suspend fun toggleBookMark(bookId: Int): Flow<Set<String>> {
+//        return
+//    }
 }

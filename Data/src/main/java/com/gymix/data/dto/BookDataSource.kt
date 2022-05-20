@@ -1,7 +1,7 @@
 package com.gymix.data.dto
 
 import com.gymix.data.network.di.services.IBookServices
-import com.gymix.data.network.model.NetworkBook
+import com.gymix.domain.entity.DomainBookResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
@@ -17,7 +17,7 @@ class BookDataSource @Inject constructor(
      * Fetches the latest books from the network and returns the result.
      * This executes on an IO-optimized thread pool, the function is main-safe.
      */
-    suspend fun fetchBooks(): Response<NetworkBook> {
+    suspend fun fetchBooks(): Response<DomainBookResponse> {
         return withContext(Dispatchers.IO) {
             service.getBooks()
         }
