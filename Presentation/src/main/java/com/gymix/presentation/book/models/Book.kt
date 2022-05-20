@@ -1,5 +1,9 @@
 package com.gymix.presentation.book.models
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Book(
     val id: Long,
     val title: String,
@@ -11,4 +15,4 @@ data class Book(
     val rating: Float,
     val authors: List<Author>,
     val numberOfPages: Int?
-)
+) : Parcelable
