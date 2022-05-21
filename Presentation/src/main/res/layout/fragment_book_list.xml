@@ -11,6 +11,8 @@
         android:layout_height="wrap_content"
         android:indeterminate="true"
         android:visibility="gone"
+        app:trackThickness="2dp"
+        app:indicatorSize="24dp"
         app:indicatorColor="@color/red"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

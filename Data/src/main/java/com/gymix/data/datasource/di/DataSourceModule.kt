@@ -1,7 +1,7 @@
-package com.gymix.data.dto.di
+package com.gymix.data.datasource.di
 
-import com.gymix.data.dto.BookDataSource
-import com.gymix.data.dto.BookDataSourceImpl
+import com.gymix.data.datasource.BookDataSource
+import com.gymix.data.datasource.BookDataSourceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

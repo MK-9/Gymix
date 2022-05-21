@@ -1,23 +1,21 @@
 package com.gymix.data.repository.di
 
-import com.gymix.data.dto.BookDataSource
-import com.gymix.data.dto.BookDataSourceImpl
 import com.gymix.data.repository.DefaultBookRepository
+import com.gymix.data.utils.DefaultDispatchersProvider
+import com.gymix.data.utils.DispatcherProvider
 import com.gymix.domain.repository.BookRepository
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class RepoModule {
+abstract class RepoModule {
 
-    @Provides
-    @Singleton
-    fun provideBookRepository(bookDataSource: BookDataSource): BookRepository {
-        return DefaultBookRepository(bookDataSource)
-    }
+    @Binds
+    abstract fun provideBookRepository(repository: DefaultBookRepository): BookRepository
 
+    @Binds
+    abstract fun provideDispatcher(provider: DefaultDispatchersProvider): DispatcherProvider
 }
