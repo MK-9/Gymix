@@ -1,7 +1,6 @@
 package com.gymix.presentation.book
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.gymix.common.Result
+import com.gymix.common.utils.network.RemoteStatus
 import com.gymix.presentation.databinding.FragmentBookListBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -40,33 +39,25 @@ class BookListFragment : Fragment() {
         configRcv()
 
         lifecycleScope.launch {
-
             repeatOnLifecycle(state = Lifecycle.State.STARTED) {
+                viewModel.fetchBooks().collect { result ->
+                    when (result) {
+                        is RemoteStatus.Loading -> {
+                            binding.prgMain.isVisible = result.state
+                        }
 
-                binding.apply {
-                    viewModel.stateFlow.collect { result ->
-                        when (result) {
-                            is Result.InProgress -> {
-                                prgMain.isVisible = result.state
-                            }
+                        is RemoteStatus.Success -> {
+                            binding.rcvMainLayout.isVisible = true
+                            bookListAdapter?.submitList(result.data?.bookList?.books)
+                        }
 
-                            is Result.OnSuccess -> {
-                                rcvMainLayout.isVisible = true
-                                Log.d("soltan", result.response.toString())
-                                bookListAdapter?.submitList(result.response)
-                            }
-
-                            is Result.OnError -> {
-                                rcvMainLayout.isVisible = false
-                            }
+                        is RemoteStatus.Error -> {
+                            binding.rcvMainLayout.isVisible = false
                         }
                     }
                 }
             }
         }
-
-        //fetch data
-        viewModel.fetchBook()
 
         return binding.root
     }

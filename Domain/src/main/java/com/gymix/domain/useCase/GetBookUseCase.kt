@@ -1,8 +1,8 @@
 package com.gymix.domain.useCase
 
-import com.gymix.domain.entity.DomainBook
-import com.gymix.common.Result
+import com.gymix.common.utils.network.RemoteStatus
+import com.gymix.domain.entities.DomainBookResponse
 
 interface GetBookUseCase {
-    suspend operator fun invoke(): Result<List<DomainBook>>
+    suspend operator fun invoke(): RemoteStatus<DomainBookResponse>
 }

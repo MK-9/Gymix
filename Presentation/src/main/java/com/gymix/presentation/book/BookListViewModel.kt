@@ -1,11 +1,9 @@
 package com.gymix.presentation.book
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.gymix.common.Result
-import com.gymix.domain.entity.DomainBook
+import com.gymix.common.utils.network.RemoteStatus
 import com.gymix.domain.useCase.GetBookUseCase
+import com.gymix.presentation.book.mappers.map
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.coroutineScope
@@ -16,27 +14,11 @@ import javax.inject.Inject
 @HiltViewModel
 class BookListViewModel @Inject constructor(val usecase: GetBookUseCase) : ViewModel() {
 
-    private val _stateFlow = MutableStateFlow<Result<List<DomainBook>>>(Result.InProgress(false))
-    var stateFlow = _stateFlow.asStateFlow()
-    val exceptionHandler = CoroutineExceptionHandler { _, throwable -> handleError(throwable) }
-
-    fun fetchBook() {
-        viewModelScope.launch(exceptionHandler) {
-            _stateFlow.value = Result.InProgress(true)
-
-            getBook()
-
-            _stateFlow.value = Result.InProgress(false)
-        }
-    }
-
-    private fun handleError(throwable: Throwable) {
-        throwable.message?.let { Log.d("aaa", it) }
-    }
-
-    private suspend fun getBook() {
-        coroutineScope {
-            _stateFlow.value = usecase.invoke()
+    fun fetchBooks() = flow {
+        emit(RemoteStatus.Loading(true))
+        when (val result = usecase.invoke()) {
+            is RemoteStatus.Success -> emit(RemoteStatus.Success(result.data?.map()))
+            is RemoteStatus.Error -> emit(RemoteStatus.Error(result.message))
         }
     }
 

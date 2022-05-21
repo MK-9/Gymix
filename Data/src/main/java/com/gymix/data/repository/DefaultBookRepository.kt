@@ -1,25 +1,23 @@
 package com.gymix.data.repository
 
-import com.gymix.data.dto.BookDataSource
 import com.gymix.domain.repository.BookRepository
-import com.gymix.common.Result
-import com.gymix.domain.entity.DomainBook
+import com.gymix.common.utils.network.RemoteStatus
+import com.gymix.data.datasource.BookDataSource
+import com.gymix.data.utils.DispatcherProvider
+import com.gymix.data.utils.safeApiCall
+import com.gymix.domain.entities.DomainBookResponse
+import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class DefaultBookRepository(private val dataSource: BookDataSource) : BookRepository {
+class DefaultBookRepository @Inject constructor(
+    private val dataSource: BookDataSource,
+    private val dispatcherProvider: DispatcherProvider
+) : BookRepository {
 
-    override suspend fun getBook(): Result<List<DomainBook>> {
-        val response = dataSource.fetchBooks()
-
-        if (response.isSuccessful) {
-
-            response.body()?.run {
-                return Result.OnSuccess(bookList.books)
-            }
-
-            return Result.OnError("unSuccessFul Response")
+    override suspend fun getBook(): RemoteStatus<DomainBookResponse> {
+        return withContext(dispatcherProvider.io()){
+            dataSource.fetchBooks()
         }
-
-        return Result.OnError("error")
     }
 
 //    override suspend fun toggleBookMark(bookId: Int): Flow<Set<String>> {

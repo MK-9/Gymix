@@ -1,14 +1,14 @@
 package com.gymix.presentation.book
 
 import androidx.recyclerview.widget.DiffUtil
-import com.gymix.domain.entity.DomainBook
+import com.gymix.presentation.book.models.Book
 
-class BookItemDiffUtils : DiffUtil.ItemCallback<DomainBook>() {
-    override fun areItemsTheSame(oldItem: DomainBook, newItem: DomainBook): Boolean {
+class BookItemDiffUtils : DiffUtil.ItemCallback<Book>() {
+    override fun areItemsTheSame(oldItem: Book, newItem: Book): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: DomainBook, newItem: DomainBook): Boolean {
+    override fun areContentsTheSame(oldItem: Book, newItem: Book): Boolean {
         return oldItem.id == newItem.id &&
                 oldItem.title == newItem.title &&
                 oldItem.description == newItem.description
