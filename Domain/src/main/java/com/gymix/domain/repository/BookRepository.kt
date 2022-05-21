@@ -1,10 +1,10 @@
 package com.gymix.domain.repository
 
-import com.gymix.common.Result
-import com.gymix.domain.entities.DomainBook
+import com.gymix.common.utils.network.RemoteStatus
+import com.gymix.domain.entities.DomainBookResponse
 
 interface BookRepository {
-    suspend fun getBook(): Result<List<DomainBook>>
+    suspend fun getBook(): RemoteStatus<DomainBookResponse>
 
 //    suspend fun toggleBookMark(bookId: Int): Flow<Set<String>>
 }

@@ -1,6 +1,7 @@
 package com.gymix.data.repository.di
 
 import com.gymix.data.dto.BookDataSource
+import com.gymix.data.dto.BookDataSourceImpl
 import com.gymix.data.repository.DefaultBookRepository
 import com.gymix.domain.repository.BookRepository
 import dagger.Module
