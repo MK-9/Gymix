@@ -1,25 +1,15 @@
 package com.gymix.data.repository
 
-import com.gymix.data.dto.BookDataSource
 import com.gymix.domain.repository.BookRepository
-import com.gymix.common.Result
-import com.gymix.domain.entities.DomainBook
+import com.gymix.common.utils.network.RemoteStatus
+import com.gymix.data.dto.BookDataSource
+import com.gymix.data.utils.safeApiCall
+import com.gymix.domain.entities.DomainBookResponse
 
 class DefaultBookRepository(private val dataSource: BookDataSource) : BookRepository {
 
-    override suspend fun getBook(): Result<List<DomainBook>> {
-        val response = dataSource.fetchBooks()
-
-        if (response.isSuccessful) {
-
-            response.body()?.run {
-                return Result.OnSuccess(bookList.books)
-            }
-
-            return Result.OnError("unSuccessFul Response")
-        }
-
-        return Result.OnError("error")
+    override suspend fun getBook(): RemoteStatus<DomainBookResponse> = safeApiCall {
+       dataSource.fetchBooks()
     }
 
 //    override suspend fun toggleBookMark(bookId: Int): Flow<Set<String>> {
