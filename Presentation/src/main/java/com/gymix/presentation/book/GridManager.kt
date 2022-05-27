@@ -10,23 +10,28 @@ import android.view.WindowMetrics
 import com.gymix.common.utils.UiUtils
 import com.gymix.presentation.R
 
-
 class GridManager(val context: Context) {
-    private var item_count_type_1 = 0
-    private val item_count_type_2 = 1
 
+    val smallPadding = context.resources.getDimensionPixelSize(R.dimen.small_100)
+    val largePadding = context.resources.getDimensionPixelSize(R.dimen.normal_100)
+    val gridPadding = largePadding
+//    val gridPadding = (smallPadding + largePadding) / 2
+
+    private var item_count_type_1 = 0
+    private var item_count_type_2 = 0
 
     fun configType1ItemWidth(): Float {
-        val screenWidth = UiUtils.getScreenWidth(context)
         item_count_type_1 = UiUtils.getItemCountForHorizontalRcv(context)
-
-        val x = screenWidth -
-                (item_count_type_1 * 2f * context.resources.getDimensionPixelSize(R.dimen.small_100)) -
-                (context.resources.getDimensionPixelSize(R.dimen.normal_100))
-
+        val x =
+            UiUtils.getScreenWidth(context) - (item_count_type_1 * 2f * smallPadding) - largePadding
         return x / (item_count_type_1 + 0.5f)
     }
 
+    fun configGridItemWidth(): Float {
+        item_count_type_2 = UiUtils.getItemCountForGridRcv(context)
+        val x = UiUtils.getScreenWidth(context) - (item_count_type_2 * 2f * gridPadding)
+        return x / (item_count_type_2)
+    }
 
 
 }
