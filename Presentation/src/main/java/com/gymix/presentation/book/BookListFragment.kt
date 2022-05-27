@@ -22,11 +22,8 @@ class BookListFragment : Fragment() {
 
     private val viewModel: BookListViewModel by viewModels()
     private lateinit var binding: FragmentBookListBinding
-    private var bookListAdapter: BookListAdapter? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private var bookListAdapter1: BookListAdapter? = null
+    private var bookListAdapter2: BookListAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,9 +31,6 @@ class BookListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentBookListBinding.inflate(inflater)
-
-        //init RecyclerView
-        configRcv()
 
         lifecycleScope.launch {
             repeatOnLifecycle(state = Lifecycle.State.STARTED) {
@@ -47,12 +41,15 @@ class BookListFragment : Fragment() {
                         }
 
                         is RemoteStatus.Success -> {
-                            binding.rcvMainLayout.isVisible = true
-                            bookListAdapter?.submitList(result.data?.bookList?.books)
+                            binding.rcv1.isVisible = true
+                            binding.rcv2.isVisible = true
+                            bookListAdapter1?.submitList(result.data?.bookList?.books)
+                            bookListAdapter2?.submitList(result.data?.bookList?.books)
                         }
 
                         is RemoteStatus.Error -> {
-                            binding.rcvMainLayout.isVisible = false
+                            binding.rcv1.isVisible = false
+                            binding.rcv2.isVisible = false
                         }
                     }
                 }
@@ -62,11 +59,29 @@ class BookListFragment : Fragment() {
         return binding.root
     }
 
-    private fun configRcv() {
-        with(binding.rcvMainLayout) {
-            bookListAdapter = BookListAdapter()
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            adapter = bookListAdapter
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        //init rcv1
+        configRcv1()
+
+        //init rcv2
+        configRcv2()
+    }
+
+    private fun configRcv1() {
+        with(binding.rcv1) {
+            bookListAdapter1 = BookListAdapter()
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
+            addItemDecoration(HorizontalBookItemDecoration(context))
+            adapter = bookListAdapter1
+        }
+    }
+
+    private fun configRcv2() {
+        with(binding.rcv2) {
+            bookListAdapter2 = BookListAdapter()
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
+            addItemDecoration(HorizontalBookItemDecoration(context))
+            adapter = bookListAdapter2
         }
     }
 }
