@@ -58,6 +58,16 @@ object UiUtils {
         }
     }
 
+    fun getItemCountForGridRcv(context: Context): Int {
+        val screenWidthPx = getScreenWidth(context)
+        val screenWidthDp = screenWidthPx.convertToDp(context).toInt()
+        return when {
+            screenWidthDp <= 400 -> 2
+            screenWidthDp in 400 until 600 -> 3
+            else -> 5
+        }
+    }
+
     fun Int.convertToPx(context: Context): Float {
         val displayMetrics = context.resources.displayMetrics
         return this * displayMetrics.density
