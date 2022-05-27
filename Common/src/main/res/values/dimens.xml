@@ -22,6 +22,8 @@
     <dimen name="large_175">56dp</dimen>
     <dimen name="large_200">64dp</dimen>
 
-    <dimen name="item_book_list_height">104dp</dimen>
+    <dimen name="item_book_list_height">134dp</dimen>
+    <dimen name="item_book_list_width">74dp</dimen>
+
 
 </resources>

@@ -95,7 +95,12 @@
         <item name="android:fontFamily">@font/nazanintarbold</item>
     </style>
 
-    <style name="Text.Description.Style" parent="TextAppearance.MaterialComponents.Body2">
+    <style name="Text.Caption.Style" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="fontFamily">@font/nazanintarbold</item>
+        <item name="android:fontFamily">@font/nazanintarbold</item>
+    </style>
+
+    <style name="Text.Body2.Style" parent="TextAppearance.MaterialComponents.Body2">
         <item name="fontFamily">@font/nazanintar</item>
         <item name="android:fontFamily">@font/nazanintar</item>
     </style>
