@@ -10,7 +10,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.gymix.common.utils.UiUtils
 import com.gymix.common.utils.network.RemoteStatus
 import com.gymix.presentation.databinding.FragmentBookListBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,7 +26,7 @@ class BookListFragment : Fragment() {
     private val viewModel: BookListViewModel by viewModels()
     private lateinit var binding: FragmentBookListBinding
     private var bookListAdapter1: BookListAdapter? = null
-    private var bookListAdapter2: BookListAdapter? = null
+    private var gridBookListAdapter: GridBookListAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,15 +44,16 @@ class BookListFragment : Fragment() {
                         }
 
                         is RemoteStatus.Success -> {
-                            binding.rcv1.isVisible = true
+//                            binding.rcv1.isVisible = true
                             binding.rcv2.isVisible = true
-                            bookListAdapter1?.submitList(result.data?.bookList?.books)
-                            bookListAdapter2?.submitList(result.data?.bookList?.books)
+                            gridBookListAdapter?.submitList(result.data?.bookList?.books)
+//                            bookListAdapter1?.submitList(result.data?.bookList?.books)
+//                            bookListAdapter2?.submitList(result.data?.bookList?.books)
                         }
 
                         is RemoteStatus.Error -> {
                             binding.rcv1.isVisible = false
-                            binding.rcv2.isVisible = false
+//                            binding.rcv2.isVisible = false
                         }
                     }
                 }
@@ -61,13 +65,13 @@ class BookListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         //init rcv1
-        configRcv1()
+//        configLinearRcv()
 
         //init rcv2
-        configRcv2()
+        configGridRcv()
     }
 
-    private fun configRcv1() {
+    private fun configLinearRcv() {
         with(binding.rcv1) {
             bookListAdapter1 = BookListAdapter()
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
@@ -76,12 +80,17 @@ class BookListFragment : Fragment() {
         }
     }
 
-    private fun configRcv2() {
+    private fun configGridRcv() {
         with(binding.rcv2) {
-            bookListAdapter2 = BookListAdapter()
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
-            addItemDecoration(HorizontalBookItemDecoration(context))
-            adapter = bookListAdapter2
+            gridBookListAdapter = GridBookListAdapter()
+            layoutManager = GridLayoutManager(
+                context,
+                UiUtils.getItemCountForGridRcv(context),
+                RecyclerView.VERTICAL,
+                false
+            )
+            addItemDecoration(GridBookItemDecoration(context))
+            adapter = gridBookListAdapter
         }
     }
 }
