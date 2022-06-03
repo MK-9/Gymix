@@ -10,7 +10,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.gymix.common.utils.UiUtils
 import com.gymix.common.utils.network.RemoteStatus
 import com.gymix.presentation.databinding.FragmentBookListBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,11 +25,8 @@ class BookListFragment : Fragment() {
 
     private val viewModel: BookListViewModel by viewModels()
     private lateinit var binding: FragmentBookListBinding
-    private var bookListAdapter: BookListAdapter? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private var bookListAdapter1: BookListAdapter? = null
+    private var gridBookListAdapter: GridBookListAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,9 +34,6 @@ class BookListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentBookListBinding.inflate(inflater)
-
-        //init RecyclerView
-        configRcv()
 
         lifecycleScope.launch {
             repeatOnLifecycle(state = Lifecycle.State.STARTED) {
@@ -47,12 +44,16 @@ class BookListFragment : Fragment() {
                         }
 
                         is RemoteStatus.Success -> {
-                            binding.rcvMainLayout.isVisible = true
-                            bookListAdapter?.submitList(result.data?.bookList?.books)
+//                            binding.rcv1.isVisible = true
+                            binding.rcv2.isVisible = true
+                            gridBookListAdapter?.submitList(result.data?.bookList?.books)
+//                            bookListAdapter1?.submitList(result.data?.bookList?.books)
+//                            bookListAdapter2?.submitList(result.data?.bookList?.books)
                         }
 
                         is RemoteStatus.Error -> {
-                            binding.rcvMainLayout.isVisible = false
+                            binding.rcv1.isVisible = false
+//                            binding.rcv2.isVisible = false
                         }
                     }
                 }
@@ -62,11 +63,34 @@ class BookListFragment : Fragment() {
         return binding.root
     }
 
-    private fun configRcv() {
-        with(binding.rcvMainLayout) {
-            bookListAdapter = BookListAdapter()
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            adapter = bookListAdapter
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        //init rcv1
+//        configLinearRcv()
+
+        //init rcv2
+        configGridRcv()
+    }
+
+    private fun configLinearRcv() {
+        with(binding.rcv1) {
+            bookListAdapter1 = BookListAdapter()
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
+            addItemDecoration(HorizontalBookItemDecoration(context))
+            adapter = bookListAdapter1
+        }
+    }
+
+    private fun configGridRcv() {
+        with(binding.rcv2) {
+            gridBookListAdapter = GridBookListAdapter()
+            layoutManager = GridLayoutManager(
+                context,
+                UiUtils.getItemCountForGridRcv(context),
+                RecyclerView.VERTICAL,
+                false
+            )
+            addItemDecoration(GridBookItemDecoration(context))
+            adapter = gridBookListAdapter
         }
     }
 }
