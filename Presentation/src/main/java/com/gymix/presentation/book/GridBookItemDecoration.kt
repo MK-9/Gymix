@@ -62,8 +62,8 @@ class GridBookItemDecoration(val context: Context) : RecyclerView.ItemDecoration
 
     private fun fillRightPadding(i: Int): Int {
         if (i == 0) {
-            val leftPadding = gridManager.startPadding
-            val rightPadding = spanWidth - itemWidth - gridManager.startPadding
+            val leftPadding = gridManager.outerPadding
+            val rightPadding = spanWidth - itemWidth - gridManager.outerPadding
             paddingsArray[0][0] = leftPadding
             paddingsArray[0][1] = rightPadding
             return rightPadding
