@@ -62,9 +62,9 @@ object UiUtils {
         val screenWidthPx = getScreenWidth(context)
         val screenWidthDp = screenWidthPx.convertToDp(context).toInt()
         return when {
-            screenWidthDp <= 400 -> 2
+            screenWidthDp <= 400 -> 3
             screenWidthDp in 400 until 600 -> 3
-            else -> 5
+            else -> 4
         }
     }
 

@@ -55,8 +55,8 @@ class GridBookItemDecoration(val context: Context) : RecyclerView.ItemDecoration
 
 
     private fun configItemPadding() {
-        for (j in 0 until itemCount) {
-            fillRightPadding(j)
+        for (i in 0 until itemCount) {
+            fillRightPadding(i)
         }
     }
 
