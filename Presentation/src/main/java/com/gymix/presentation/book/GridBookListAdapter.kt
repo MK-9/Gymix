@@ -22,7 +22,7 @@ class GridBookListAdapter : ListAdapter<Book, GridBookListAdapter.BookItemViewHo
         )
         val gridManager = GridManager(parent.context)
         val layoutParams = ViewGroup.LayoutParams(
-            gridManager.configGridItemWidth().toInt(),
+            gridManager.getGridItemWidth(),
             parent.context.resources.getDimensionPixelOffset(R.dimen.item_book_list_height)
         )
         binding.root.layoutParams = layoutParams

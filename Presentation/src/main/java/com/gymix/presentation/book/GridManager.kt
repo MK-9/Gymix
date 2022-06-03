@@ -14,24 +14,24 @@ class GridManager(val context: Context) {
 
     val smallPadding = context.resources.getDimensionPixelSize(R.dimen.small_100)
     val largePadding = context.resources.getDimensionPixelSize(R.dimen.normal_100)
-    val gridPadding = largePadding
-//    val gridPadding = (smallPadding + largePadding) / 2
 
-    private var item_count_type_1 = 0
-    private var item_count_type_2 = 0
+    //
+    val innerPadding = context.resources.getDimensionPixelOffset(R.dimen.normal_100)
+    val startPadding = context.resources.getDimensionPixelOffset(R.dimen.normal_250)
 
-    fun configType1ItemWidth(): Float {
-        item_count_type_1 = UiUtils.getItemCountForHorizontalRcv(context)
+    fun getBoxItemWidth(): Float {
+        val itemCount = UiUtils.getItemCountForHorizontalRcv(context)
         val x =
-            UiUtils.getScreenWidth(context) - (item_count_type_1 * 2f * smallPadding) - largePadding
-        return x / (item_count_type_1 + 0.5f)
+            UiUtils.getScreenWidth(context) - (itemCount * 2f * smallPadding) - largePadding
+        return x / (itemCount + 0.5f)
     }
 
-    fun configGridItemWidth(): Float {
-        item_count_type_2 = UiUtils.getItemCountForGridRcv(context)
-        val x = UiUtils.getScreenWidth(context) - (item_count_type_2 * 2f * gridPadding)
-        return x / (item_count_type_2)
+    fun getGridItemWidth(): Int {
+        val itemCount = UiUtils.getItemCountForGridRcv(context)
+        return (UiUtils.getScreenWidth(context) - (2 * startPadding) - (itemCount - 1) * (innerPadding)) / itemCount
     }
 
+    fun getSpanWidth(): Int =
+        UiUtils.getScreenWidth(context) / UiUtils.getItemCountForGridRcv(context)
 
 }
