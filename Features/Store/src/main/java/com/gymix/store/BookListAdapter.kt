@@ -1,18 +1,15 @@
-package com.gymix.presentation.book
+package com.gymix.store
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.gymix.common.utils.UiUtils
-import com.gymix.domain.entities.DomainBook
+import com.gymix.common.utils.GridManager
 import com.gymix.presentation.R
 import com.gymix.presentation.book.models.Book
-import com.gymix.presentation.databinding.ItemBookListBinding
 import com.gymix.presentation.databinding.SmallItemBookListBinding
 
-class GridBookListAdapter(private val gridManager: GridManager) : ListAdapter<Book, GridBookListAdapter.BookItemViewHolder>(BookItemDiffUtils()) {
+class BookListAdapter : ListAdapter<Book, BookListAdapter.BookItemViewHolder>(BookItemDiffUtils()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookItemViewHolder {
         val binding = SmallItemBookListBinding.inflate(
@@ -20,9 +17,10 @@ class GridBookListAdapter(private val gridManager: GridManager) : ListAdapter<Bo
             parent,
             false
         )
+        val gridManager = GridManager(parent.context)
         val layoutParams = ViewGroup.LayoutParams(
-            gridManager.getGridItemWidth(),
-            parent.context.resources.getDimensionPixelOffset(R.dimen.item_book_list_height)
+            gridManager.getBoxItemWidth().toInt(),
+            ViewGroup.LayoutParams.MATCH_PARENT
         )
         binding.root.layoutParams = layoutParams
         return BookItemViewHolder(binding)

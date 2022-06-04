@@ -6,7 +6,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
-import com.gymix.presentation.book.BookListFragment
 import com.gymix.training.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 

@@ -1,9 +1,10 @@
-package com.gymix.presentation.book
+package com.gymix.store
 
 import android.content.Context
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.gymix.common.utils.GridManager
 import kotlin.math.ceil
 
 class GridBookItemDecoration(context: Context, private val gridManager: GridManager) :

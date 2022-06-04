@@ -1,4 +1,4 @@
-package com.gymix.presentation.book
+package com.gymix.store
 
 import androidx.lifecycle.ViewModel
 import com.gymix.common.utils.network.RemoteStatus

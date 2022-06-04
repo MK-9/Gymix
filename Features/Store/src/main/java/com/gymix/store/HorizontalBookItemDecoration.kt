@@ -1,4 +1,4 @@
-package com.gymix.presentation.book
+package com.gymix.store
 
 import android.content.Context
 import android.graphics.Rect

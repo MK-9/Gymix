@@ -1,14 +1,15 @@
-package com.gymix.presentation.book
+package com.gymix.store
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.gymix.common.utils.GridManager
 import com.gymix.presentation.R
 import com.gymix.presentation.book.models.Book
 import com.gymix.presentation.databinding.SmallItemBookListBinding
 
-class BookListAdapter : ListAdapter<Book, BookListAdapter.BookItemViewHolder>(BookItemDiffUtils()) {
+class GridBookListAdapter(private val gridManager: GridManager) : ListAdapter<Book, GridBookListAdapter.BookItemViewHolder>(BookItemDiffUtils()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookItemViewHolder {
         val binding = SmallItemBookListBinding.inflate(
@@ -16,10 +17,9 @@ class BookListAdapter : ListAdapter<Book, BookListAdapter.BookItemViewHolder>(Bo
             parent,
             false
         )
-        val gridManager = GridManager(parent.context)
         val layoutParams = ViewGroup.LayoutParams(
-            gridManager.getBoxItemWidth().toInt(),
-            ViewGroup.LayoutParams.MATCH_PARENT
+            gridManager.getGridItemWidth(),
+            parent.context.resources.getDimensionPixelOffset(R.dimen.item_book_list_height)
         )
         binding.root.layoutParams = layoutParams
         return BookItemViewHolder(binding)
