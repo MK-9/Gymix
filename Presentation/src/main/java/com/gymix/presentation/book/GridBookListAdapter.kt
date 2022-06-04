@@ -12,7 +12,7 @@ import com.gymix.presentation.book.models.Book
 import com.gymix.presentation.databinding.ItemBookListBinding
 import com.gymix.presentation.databinding.SmallItemBookListBinding
 
-class GridBookListAdapter : ListAdapter<Book, GridBookListAdapter.BookItemViewHolder>(BookItemDiffUtils()) {
+class GridBookListAdapter(private val gridManager: GridManager) : ListAdapter<Book, GridBookListAdapter.BookItemViewHolder>(BookItemDiffUtils()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookItemViewHolder {
         val binding = SmallItemBookListBinding.inflate(
@@ -20,7 +20,6 @@ class GridBookListAdapter : ListAdapter<Book, GridBookListAdapter.BookItemViewHo
             parent,
             false
         )
-        val gridManager = GridManager(parent.context)
         val layoutParams = ViewGroup.LayoutParams(
             gridManager.getGridItemWidth(),
             parent.context.resources.getDimensionPixelOffset(R.dimen.item_book_list_height)

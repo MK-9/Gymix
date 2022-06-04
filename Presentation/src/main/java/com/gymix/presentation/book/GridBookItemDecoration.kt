@@ -4,24 +4,20 @@ import android.content.Context
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.gymix.common.utils.UiUtils
 import kotlin.math.ceil
 
-class GridBookItemDecoration(val context: Context) : RecyclerView.ItemDecoration() {
+class GridBookItemDecoration(context: Context, private val gridManager: GridManager) :
+    RecyclerView.ItemDecoration() {
 
-    private var itemCount = UiUtils.getItemCountForGridRcv(context)
-
-    private val gridManager by lazy { createGridManager() }
+    private var spanCount = gridManager.getSpanCountForGridRcv(context)
     private val itemWidth = gridManager.getGridItemWidth()
-    private val spanWidth = gridManager.getSpanWidth()
+    private val spanWidth = gridManager.getGridSpanWidth()
 
-    private val paddingsArray = Array(itemCount) { IntArray(2) }
+    private val paddingsArray = Array(spanCount) { IntArray(2) }
 
     init {
         configItemPadding()
     }
-
-    private fun createGridManager() = GridManager(context)
 
     override fun getItemOffsets(
         outRect: Rect,
@@ -29,17 +25,17 @@ class GridBookItemDecoration(val context: Context) : RecyclerView.ItemDecoration
         parent: RecyclerView,
         state: RecyclerView.State
     ) {
-        val rowCount = ceil(parent.adapter!!.itemCount.toDouble() / itemCount).toInt()
+        val rowCount = ceil(parent.adapter!!.itemCount.toDouble() / spanCount).toInt()
         val position = parent.getChildAdapterPosition(view)
         //set top and bottom padding for first and bottom row
         when {
             //first row
-            position < itemCount -> {
+            position < spanCount -> {
                 outRect.top = gridManager.largePadding
                 outRect.bottom = gridManager.smallPadding
             }
             //last row
-            position / itemCount == rowCount - 1 -> {
+            position / spanCount == rowCount - 1 -> {
                 outRect.top = gridManager.smallPadding
                 outRect.bottom = gridManager.largePadding
             }
@@ -49,13 +45,13 @@ class GridBookItemDecoration(val context: Context) : RecyclerView.ItemDecoration
             }
         }
 
-        outRect.left = paddingsArray[position % itemCount][0]
-        outRect.right = paddingsArray[position % itemCount][1]
+        outRect.left = paddingsArray[position % spanCount][0]
+        outRect.right = paddingsArray[position % spanCount][1]
     }
 
 
     private fun configItemPadding() {
-        for (i in 0 until itemCount) {
+        for (i in 0 until spanCount) {
             fillRightPadding(i)
         }
     }

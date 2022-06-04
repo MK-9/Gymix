@@ -6,7 +6,7 @@ import com.gymix.domain.repository.BookRepository
 import com.gymix.domain.useCase.GetBookUseCase
 import javax.inject.Inject
 
-class GetBookInteractor @Inject constructor(val repository: BookRepository) : GetBookUseCase {
+class GetBookInteractor @Inject constructor(private val repository: BookRepository) : GetBookUseCase {
 
     override suspend fun invoke(): RemoteStatus<DomainBookResponse> {
         return repository.getBook()

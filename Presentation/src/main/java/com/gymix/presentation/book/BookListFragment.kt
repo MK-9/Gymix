@@ -13,7 +13,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.gymix.common.utils.UiUtils
 import com.gymix.common.utils.network.RemoteStatus
 import com.gymix.presentation.databinding.FragmentBookListBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -82,14 +81,15 @@ class BookListFragment : Fragment() {
 
     private fun configGridRcv() {
         with(binding.rcv2) {
-            gridBookListAdapter = GridBookListAdapter()
+            val gridManager = GridManager(context)
+            gridBookListAdapter = GridBookListAdapter(gridManager)
             layoutManager = GridLayoutManager(
                 context,
-                UiUtils.getItemCountForGridRcv(context),
+                gridManager.getSpanCountForGridRcv(context),
                 RecyclerView.VERTICAL,
                 false
             )
-            addItemDecoration(GridBookItemDecoration(context))
+            addItemDecoration(GridBookItemDecoration(context, gridManager))
             adapter = gridBookListAdapter
         }
     }
