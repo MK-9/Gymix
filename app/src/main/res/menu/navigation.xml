@@ -4,10 +4,12 @@
         android:id="@+id/bookMark"
         android:icon="@drawable/ic_baseline_collections_bookmark_48"
         android:title="@string/bookmark" />
-
     <item
-        android:id="@+id/home"
+        android:id="@+id/videoPlayer"
+        android:icon="@drawable/ic_baseline_collections_bookmark_48"
+        android:title="@string/videoPlayer" />
+    <item
+        android:id="@+id/store"
         android:icon="@drawable/ic_baseline_storefront_48"
         android:title="@string/store" />
-
 </menu>

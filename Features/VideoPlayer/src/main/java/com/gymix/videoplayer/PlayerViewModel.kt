@@ -1,7 +1,10 @@
 package com.gymix.videoplayer
 
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class PlayerViewModel : ViewModel() {
+@HiltViewModel
+class PlayerViewModel @Inject constructor() : ViewModel() {
 
 }

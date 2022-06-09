@@ -2,15 +2,20 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/bottom_nav_graph"
-    app:startDestination="@id/home">
+    app:startDestination="@id/store">
 
     <fragment
-        android:id="@+id/home"
+        android:id="@+id/store"
         android:name="com.gymix.store.StoreFragment"
-        android:label="home" />
+        android:label="@string/store" />
+
+    <fragment
+        android:id="@+id/videoPlayer"
+        android:name="com.gymix.videoplayer.PlayerFragment"
+        android:label="@string/videoPlayer" />
 
     <fragment
         android:id="@+id/bookMark"
         android:name="com.gymix.store.StoreFragment"
-        android:label="bookMark" />
+        android:label="@string/bookmark" />
 </navigation>
