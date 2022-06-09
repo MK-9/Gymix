@@ -17,6 +17,7 @@
             <option value="$PROJECT_DIR$/Features" />
             <option value="$PROJECT_DIR$/Features/Bookmark" />
             <option value="$PROJECT_DIR$/Features/Store" />
+            <option value="$PROJECT_DIR$/Features/VideoPlayer" />
             <option value="$PROJECT_DIR$/Presentation" />
             <option value="$PROJECT_DIR$/app" />
           </set>
