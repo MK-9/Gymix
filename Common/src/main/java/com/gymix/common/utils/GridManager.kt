@@ -1,9 +1,8 @@
-package com.gymix.presentation.book
+package com.gymix.common.utils
 
 import android.content.Context
-import com.gymix.common.utils.UiUtils
 import com.gymix.common.utils.UiUtils.convertToDp
-import com.gymix.presentation.R
+import com.gymix.common.R
 
 class GridManager(val context: Context) {
 
