@@ -5,9 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.gymix.common.utils.GridManager
-import com.gymix.presentation.R
 import com.gymix.presentation.book.models.Book
-import com.gymix.presentation.databinding.SmallItemBookListBinding
+import com.gymix.store.databinding.SmallItemBookListBinding
 
 class BookListAdapter : ListAdapter<Book, BookListAdapter.BookItemViewHolder>(BookItemDiffUtils()) {
 

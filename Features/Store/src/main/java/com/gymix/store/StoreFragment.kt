@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gymix.common.utils.GridManager
 import com.gymix.common.utils.network.RemoteStatus
-import com.gymix.presentation.databinding.FragmentBookListBinding
+import com.gymix.store.databinding.FragmentBookListBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
