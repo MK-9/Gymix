@@ -1,4 +1,4 @@
-package com.gymix.presentation.book
+package com.gymix.store
 
 import androidx.recyclerview.widget.DiffUtil
 import com.gymix.presentation.book.models.Book

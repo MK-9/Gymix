@@ -6,11 +6,11 @@
 
     <fragment
         android:id="@+id/home"
-        android:name="com.gymix.presentation.book.BookListFragment"
+        android:name="com.gymix.store.StoreFragment"
         android:label="home" />
 
     <fragment
         android:id="@+id/bookMark"
-        android:name="com.gymix.presentation.book.BookListFragment"
+        android:name="com.gymix.store.StoreFragment"
         android:label="bookMark" />
 </navigation>
