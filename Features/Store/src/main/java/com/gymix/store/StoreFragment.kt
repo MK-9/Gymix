@@ -29,8 +29,7 @@ class StoreFragment : Fragment() {
     private var gridBookListAdapter: GridBookListAdapter? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentBookListBinding.inflate(inflater)
