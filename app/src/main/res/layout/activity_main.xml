@@ -14,8 +14,9 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:gravity="bottom"
-            sothree:umanoPanelHeight="?attr/actionBarSize"
+            sothree:umanoPanelHeight="64dp"
             sothree:umanoShadowHeight="4dp">
+
             <!-- MAIN CONTENT -->
             <androidx.coordinatorlayout.widget.CoordinatorLayout
                 android:id="@+id/container"
@@ -42,41 +43,29 @@
             </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
             <!-- SLIDING LAYOUT -->
-            <LinearLayout
+            <FrameLayout
                 android:id="@+id/dragView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#00ffff"
+                android:background="#ffffff"
                 android:clickable="true"
-                android:focusable="false"
-                android:orientation="vertical">
+                android:focusable="false">
 
-                <LinearLayout
+                <include
+                    android:id="@+id/small_player_item"
+                    layout="@layout/small_player_item"
                     android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:orientation="horizontal">
+                    android:layout_height="64dp" />
 
-                    <TextView
-                        android:id="@+id/name"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:paddingLeft="10dp"
-                        android:textSize="14sp" />
+                <include
+                    android:id="@+id/big_player_item"
+                    layout="@layout/big_player_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone" />
 
-                    <Button
-                        android:id="@+id/follow"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical|right"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:textSize="14sp" />
+            </FrameLayout>
 
-                </LinearLayout>
-
-            </LinearLayout>
         </com.sothree.slidinguppanel.SlidingUpPanelLayout>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
