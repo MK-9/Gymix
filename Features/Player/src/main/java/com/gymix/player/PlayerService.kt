@@ -115,8 +115,53 @@ class PlayerService @Inject constructor() : Service(),
         //a media resource being streamed over the network.
     }
 
-    override fun onAudioFocusChange(p0: Int) {
+    private fun requestAudioFocus(): Boolean {
+        audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager?
+        val result = audioManager?.requestAudioFocus(
+            this,
+            AudioManager.STREAM_MUSIC,
+            AudioManager.AUDIOFOCUS_GAIN
+        )
+        return result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED
+    }
+
+    private fun removeAudioFocus(): Boolean {
+        val result = audioManager?.abandonAudioFocus(this)
+        return result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED
+    }
+
+    override fun onAudioFocusChange(focusState: Int) {
         //Invoked when the audio focus of the system is updated.
+        when (focusState) {
+            AudioManager.AUDIOFOCUS_GAIN -> {
+                mediaPlayer?.run {
+                    if (!isPlaying) start()
+                } ?: run {
+                    if (mediaPlayer == null) initMediaPlayer()
+                }
+                mediaPlayer?.setVolume(1f, 1f)
+            }
+
+            AudioManager.AUDIOFOCUS_LOSS -> {
+                mediaPlayer?.run {
+                    if (isPlaying) stop()
+                    release()
+                    mediaPlayer = null
+                }
+            }
+
+            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT -> {
+                mediaPlayer?.run {
+                    if (isPlaying) pause()
+                }
+            }
+
+            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK -> {
+                mediaPlayer?.run {
+                    if (isPlaying) setVolume(1f, 1f)
+                }
+            }
+        }
     }
 
     override fun onBind(p0: Intent?): IBinder {
