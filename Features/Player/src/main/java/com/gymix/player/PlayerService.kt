@@ -83,12 +83,12 @@ class PlayerService @Inject constructor() : Service(),
         }
     }
 
-    override fun onPrepared(p0: MediaPlayer?) {
+    override fun onPrepared(player: MediaPlayer?) {
         //Invoked when the media source is ready for playback.
         playMedia()
     }
 
-    override fun onCompletion(p0: MediaPlayer?) {
+    override fun onCompletion(player: MediaPlayer?) {
         //Invoked when playback of a media source has completed.
         stopMedia()
 
@@ -96,21 +96,21 @@ class PlayerService @Inject constructor() : Service(),
         stopSelf()
     }
 
-    override fun onError(p0: MediaPlayer?, p1: Int, p2: Int): Boolean {
+    override fun onError(player: MediaPlayer?, errorType: Int, extraCode: Int): Boolean {
         //Invoked when there has been an error during an asynchronous operation.
         return false
     }
 
-    override fun onSeekComplete(p0: MediaPlayer?) {
+    override fun onSeekComplete(player: MediaPlayer?) {
         //Invoked indicating the completion of a seek operation.
     }
 
-    override fun onInfo(p0: MediaPlayer?, p1: Int, p2: Int): Boolean {
+    override fun onInfo(player: MediaPlayer?, infoType: Int, extraCode: Int): Boolean {
         //Invoked when the audio focus of the system is updated.
         return false
     }
 
-    override fun onBufferingUpdate(p0: MediaPlayer?, p1: Int) {
+    override fun onBufferingUpdate(player: MediaPlayer?, percentage: Int) {
         //Invoked indicating buffering status of
         //a media resource being streamed over the network.
     }
@@ -164,7 +164,7 @@ class PlayerService @Inject constructor() : Service(),
         }
     }
 
-    override fun onBind(p0: Intent?): IBinder {
+    override fun onBind(intent: Intent?): IBinder {
         return PlayerBinder()
     }
 
