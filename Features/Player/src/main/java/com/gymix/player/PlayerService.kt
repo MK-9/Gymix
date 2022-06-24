@@ -1,7 +1,9 @@
 package com.gymix.player
 
 import android.app.Service
+import android.content.Context
 import android.content.Intent
+import android.media.AudioFocusRequest
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Binder
@@ -21,6 +23,9 @@ class PlayerService @Inject constructor() : Service(),
 
     private var mediaPlayer: MediaPlayer? = null
     private val mediaFile: String? = null
+    private var position: Int = 0
+
+    private var audioManager: AudioManager? = null
 
     private fun initMediaPlayer() {
         mediaPlayer = MediaPlayer().apply {
@@ -44,14 +49,51 @@ class PlayerService @Inject constructor() : Service(),
         mediaPlayer?.prepareAsync()
     }
 
+    private fun playMedia() {
+        mediaPlayer?.run {
+            if (!isPlaying) {
+                start()
+            }
+        }
+    }
+
+    private fun pauseMedia() {
+        mediaPlayer?.run {
+            if (isPlaying) {
+                pause()
+                position = currentPosition
+            }
+        }
+    }
+
+    private fun stopMedia() {
+        mediaPlayer?.run {
+            if (isPlaying) {
+                stop()
+            }
+        }
+    }
+
+    private fun resumeMedia() {
+        mediaPlayer?.run {
+            if (!isPlaying) {
+                seekTo(currentPosition)
+                start()
+            }
+        }
+    }
+
     override fun onPrepared(p0: MediaPlayer?) {
         //Invoked when the media source is ready for playback.
-
+        playMedia()
     }
 
     override fun onCompletion(p0: MediaPlayer?) {
         //Invoked when playback of a media source has completed.
+        stopMedia()
 
+        //stop the service
+        stopSelf()
     }
 
     override fun onError(p0: MediaPlayer?, p1: Int, p2: Int): Boolean {
