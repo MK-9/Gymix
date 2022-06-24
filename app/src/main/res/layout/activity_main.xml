@@ -51,12 +51,14 @@
                 android:clickable="true"
                 android:focusable="false">
 
+                <!-- Small Item  -->
                 <include
                     android:id="@+id/small_player_item"
                     layout="@layout/small_player_item"
                     android:layout_width="match_parent"
                     android:layout_height="64dp" />
 
+                <!-- Big Item  -->
                 <include
                     android:id="@+id/big_player_item"
                     layout="@layout/big_player_item"

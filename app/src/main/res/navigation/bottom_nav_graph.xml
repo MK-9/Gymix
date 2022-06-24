@@ -11,7 +11,7 @@
 
     <fragment
         android:id="@+id/videoPlayer"
-        android:name="com.gymix.videoplayer.PlayerFragment"
+        android:name="com.gymix.player.PlayerFragment"
         android:label="@string/videoPlayer" />
 
     <fragment
