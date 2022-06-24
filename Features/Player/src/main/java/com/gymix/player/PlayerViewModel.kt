@@ -1,4 +1,4 @@
-package com.gymix.videoplayer
+package com.gymix.player
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

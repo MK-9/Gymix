@@ -1,4 +1,4 @@
-package com.gymix.videoplayer
+package com.gymix.player
 
 import org.junit.Test
 

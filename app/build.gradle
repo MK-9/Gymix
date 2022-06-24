@@ -53,7 +53,7 @@ dependencies {
     implementation project(path: ":Presentation")
     implementation project(path: ":Common")
     implementation project(':Features:Store')
-    implementation project(':Features:VideoPlayer')
+    implementation project(':Features:Player')
     implementation project(':Features:Bookmark')
 
     implementation 'androidx.multidex:multidex:2.0.1'
