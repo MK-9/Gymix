@@ -22,10 +22,33 @@ class PlayerService @Inject constructor() : Service(),
     AudioManager.OnAudioFocusChangeListener {
 
     private var mediaPlayer: MediaPlayer? = null
-    private val mediaFile: String? = null
+    private var mediaFile: String? = null
     private var position: Int = 0
 
     private var audioManager: AudioManager? = null
+
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        try {
+            mediaFile = intent?.extras?.getString("Media")
+        } catch (e: Exception) {
+            stopSelf()
+        }
+
+        if (!requestAudioFocus()) stopSelf()
+
+        if (mediaFile != null && mediaFile != "") initMediaPlayer()
+
+        return START_NOT_STICKY
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mediaPlayer?.run {
+            stopMedia()
+            release()
+        }
+        removeAudioFocus()
+    }
 
     private fun initMediaPlayer() {
         mediaPlayer = MediaPlayer().apply {
