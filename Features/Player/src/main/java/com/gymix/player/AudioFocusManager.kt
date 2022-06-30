@@ -5,6 +5,7 @@ import android.media.AudioAttributes
 import android.media.AudioFocusRequest
 import android.media.AudioManager
 import android.os.Build
+import androidx.annotation.ChecksSdkIntAtLeast
 
 class AudioFocusManager constructor(context: Context) : AudioManager.OnAudioFocusChangeListener {
 
@@ -22,7 +23,7 @@ class AudioFocusManager constructor(context: Context) : AudioManager.OnAudioFocu
 
     fun requestAudioFocus(): Boolean {
         val result: Int =
-            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
+            if (isAtLeastO()) {
                 audioFocusRequest =
                     AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN)
                         .setAudioAttributes(
@@ -48,7 +49,7 @@ class AudioFocusManager constructor(context: Context) : AudioManager.OnAudioFocu
 
     fun removeAudioFocus(): Boolean {
         val result: Int =
-            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
+            if (isAtLeastO()) {
                 audioManager?.abandonAudioFocusRequest(audioFocusRequest)
             } else {
                 audioManager?.abandonAudioFocus(this)
@@ -73,6 +74,9 @@ class AudioFocusManager constructor(context: Context) : AudioManager.OnAudioFocu
             }
         }
     }
+
+    @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.O)
+    private fun isAtLeastO(): Boolean = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
 
     interface AudioFocusGainListener {
         fun onAudioFocusGain()
