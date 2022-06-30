@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity() {
     private fun initServiceConnection() = object : ServiceConnection {
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
             serviceBind = true
-            playerService = (service as PlayerService.PlayerBinder).getPlayerService()
+            playerService = (service as PlayerService.MyBinder).getPlayerService()
 
             Toast.makeText(this@MainActivity, "Service Bound", Toast.LENGTH_SHORT).show()
         }

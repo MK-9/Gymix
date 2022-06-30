@@ -1,9 +1,7 @@
 package com.gymix.player
 
 import android.app.Service
-import android.content.Context
 import android.content.Intent
-import android.media.AudioFocusRequest
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Binder
@@ -19,13 +17,16 @@ class PlayerService @Inject constructor() : Service(),
     MediaPlayer.OnSeekCompleteListener,
     MediaPlayer.OnInfoListener,
     MediaPlayer.OnBufferingUpdateListener,
-    AudioManager.OnAudioFocusChangeListener {
+    AudioFocusManager.AudioFocusGainListener,
+    AudioFocusManager.AudioFocusLossListener,
+    AudioFocusManager.AudioFocusLossTransientListener,
+    AudioFocusManager.AudioFocusLossTransientCanDuck {
 
     private var mediaPlayer: MediaPlayer? = null
     private var mediaFile: String? = null
     private var position: Int = 0
 
-    private var audioManager: AudioManager? = null
+    private var audioFocusManager: AudioFocusManager? = null
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         try {
@@ -34,9 +35,12 @@ class PlayerService @Inject constructor() : Service(),
             stopSelf()
         }
 
-        if (!requestAudioFocus()) stopSelf()
+        //init audio focus manager
+        initAudioFocusManager()
 
-        if (mediaFile != null && mediaFile != "") initMediaPlayer()
+        //init audio manger
+        if (mediaFile?.isNotEmpty() == true)
+            initMediaPlayer()
 
         return START_NOT_STICKY
     }
@@ -47,7 +51,19 @@ class PlayerService @Inject constructor() : Service(),
             stopMedia()
             release()
         }
-        removeAudioFocus()
+        audioFocusManager?.removeAudioFocus()
+    }
+
+    private fun initAudioFocusManager() {
+        audioFocusManager = AudioFocusManager(this).apply {
+            audioFocusGainListener = this@PlayerService
+            audioFocusLossListener = this@PlayerService
+            audioFocusLossTransientListener = this@PlayerService
+            audioFocusLossTransientCanDuckListener = this@PlayerService
+        }.also {
+            if (!it.requestAudioFocus())
+                stopSelf()
+        }
     }
 
     private fun initMediaPlayer() {
@@ -73,6 +89,7 @@ class PlayerService @Inject constructor() : Service(),
     }
 
     private fun playMedia() {
+        //we should add requestAudioFocus
         mediaPlayer?.run {
             if (!isPlaying) {
                 start()
@@ -138,60 +155,40 @@ class PlayerService @Inject constructor() : Service(),
         //a media resource being streamed over the network.
     }
 
-    private fun requestAudioFocus(): Boolean {
-        audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager?
-        val result = audioManager?.requestAudioFocus(
-            this,
-            AudioManager.STREAM_MUSIC,
-            AudioManager.AUDIOFOCUS_GAIN
-        )
-        return result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED
+    override fun onAudioFocusGain() {
+        mediaPlayer?.run {
+            if (!isPlaying) start()
+        } ?: run {
+            if (mediaPlayer == null) initMediaPlayer()
+        }
+        mediaPlayer?.setVolume(1f, 1f)
     }
 
-    private fun removeAudioFocus(): Boolean {
-        val result = audioManager?.abandonAudioFocus(this)
-        return result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED
+    override fun onAudioFocusLoss() {
+        mediaPlayer?.run {
+            if (isPlaying) stop()
+            release()
+            mediaPlayer = null
+        }
     }
 
-    override fun onAudioFocusChange(focusState: Int) {
-        //Invoked when the audio focus of the system is updated.
-        when (focusState) {
-            AudioManager.AUDIOFOCUS_GAIN -> {
-                mediaPlayer?.run {
-                    if (!isPlaying) start()
-                } ?: run {
-                    if (mediaPlayer == null) initMediaPlayer()
-                }
-                mediaPlayer?.setVolume(1f, 1f)
-            }
+    override fun onAudioFocusLossTransient() {
+        mediaPlayer?.run {
+            if (isPlaying) pause()
+        }
+    }
 
-            AudioManager.AUDIOFOCUS_LOSS -> {
-                mediaPlayer?.run {
-                    if (isPlaying) stop()
-                    release()
-                    mediaPlayer = null
-                }
-            }
-
-            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT -> {
-                mediaPlayer?.run {
-                    if (isPlaying) pause()
-                }
-            }
-
-            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK -> {
-                mediaPlayer?.run {
-                    if (isPlaying) setVolume(1f, 1f)
-                }
-            }
+    override fun onAudioFocusLossTransientCanDuck() {
+        mediaPlayer?.run {
+            if (isPlaying) setVolume(1f, 1f)
         }
     }
 
     override fun onBind(intent: Intent?): IBinder {
-        return PlayerBinder()
+        return MyBinder()
     }
 
-    inner class PlayerBinder : Binder() {
+    inner class MyBinder : Binder() {
         fun getPlayerService(): PlayerService {
             return this@PlayerService
         }
