@@ -2,6 +2,7 @@ package com.gymix.player
 
 import android.app.Service
 import android.content.Intent
+import android.content.IntentFilter
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Binder
@@ -17,16 +18,18 @@ class PlayerService @Inject constructor() : Service(),
     MediaPlayer.OnSeekCompleteListener,
     MediaPlayer.OnInfoListener,
     MediaPlayer.OnBufferingUpdateListener,
-    AudioFocusManager.AudioFocusGainListener,
-    AudioFocusManager.AudioFocusLossListener,
-    AudioFocusManager.AudioFocusLossTransientListener,
-    AudioFocusManager.AudioFocusLossTransientCanDuck {
+    AudioFocusManager.OnAudioFocusGainListener,
+    AudioFocusManager.OnAudioFocusLossListener,
+    AudioFocusManager.OnAudioFocusLossTransientListener,
+    AudioFocusManager.OnAudioFocusLossTransientCanDuck,
+    BecomeNoisyReceiver.OnAudioBecomeNoisyListener {
 
     private var mediaPlayer: MediaPlayer? = null
+    private var audioFocusManager: AudioFocusManager? = null
+    private var becomeNoisyReceiver: BecomeNoisyReceiver? = null
+
     private var mediaFile: String? = null
     private var position: Int = 0
-
-    private var audioFocusManager: AudioFocusManager? = null
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         try {
@@ -45,6 +48,12 @@ class PlayerService @Inject constructor() : Service(),
         return START_NOT_STICKY
     }
 
+    override fun onCreate() {
+        super.onCreate()
+        //ACTION_AUDIO_BECOMING_NOISY -- change in audio outputs -- BroadcastReceiver
+        registerBecomingNoisyReceiver()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         mediaPlayer?.run {
@@ -52,18 +61,22 @@ class PlayerService @Inject constructor() : Service(),
             release()
         }
         audioFocusManager?.removeAudioFocus()
+
+        //unregister BroadcastReceivers
+        unregisterBecomingNoisyReceiver()
     }
 
     private fun initAudioFocusManager() {
-        audioFocusManager = AudioFocusManager(this).apply {
-            audioFocusGainListener = this@PlayerService
-            audioFocusLossListener = this@PlayerService
-            audioFocusLossTransientListener = this@PlayerService
-            audioFocusLossTransientCanDuckListener = this@PlayerService
-        }.also {
-            if (!it.requestAudioFocus())
-                stopSelf()
-        }
+        audioFocusManager = AudioFocusManager(this)
+            .apply {
+                if (!requestAudioFocus())
+                    stopSelf()
+            }.apply {
+                audioFocusGainListener = this@PlayerService
+                audioFocusLossListener = this@PlayerService
+                audioFocusLossTransientListener = this@PlayerService
+                audioFocusLossTransientCanDuckListener = this@PlayerService
+            }
     }
 
     private fun initMediaPlayer() {
@@ -86,6 +99,17 @@ class PlayerService @Inject constructor() : Service(),
             stopSelf()
         }
         mediaPlayer?.prepareAsync()
+    }
+
+    private fun registerBecomingNoisyReceiver() {
+        becomeNoisyReceiver = BecomeNoisyReceiver().apply {
+            setAudioBecomeNoisyListener(this@PlayerService)
+            registerReceiver(this, IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY))
+        }
+    }
+
+    private fun unregisterBecomingNoisyReceiver() {
+        unregisterReceiver(becomeNoisyReceiver)
     }
 
     private fun playMedia() {
@@ -174,18 +198,34 @@ class PlayerService @Inject constructor() : Service(),
 
     override fun onAudioFocusLossTransient() {
         mediaPlayer?.run {
-            if (isPlaying) pause()
+            if (isPlaying)
+                pause()
         }
     }
 
     override fun onAudioFocusLossTransientCanDuck() {
         mediaPlayer?.run {
-            if (isPlaying) setVolume(1f, 1f)
+            if (isPlaying)
+                setVolume(1f, 1f)
         }
+    }
+
+    override fun onAudioBecomeNoisy() {
+        //pause audio on ACTION_AUDIO_BECOMING_NOISY
+        mediaPlayer?.run {
+            if (isPlaying)
+                pauseMedia()
+        }
+        //pause state
+        buildNotification()
     }
 
     override fun onBind(intent: Intent?): IBinder {
         return MyBinder()
+    }
+
+    private fun buildNotification() {
+        //todo
     }
 
     inner class MyBinder : Binder() {

@@ -9,10 +9,10 @@ import androidx.annotation.ChecksSdkIntAtLeast
 
 class AudioFocusManager constructor(context: Context) : AudioManager.OnAudioFocusChangeListener {
 
-    var audioFocusGainListener: AudioFocusGainListener? = null
-    var audioFocusLossListener: AudioFocusLossListener? = null
-    var audioFocusLossTransientListener: AudioFocusLossTransientListener? = null
-    var audioFocusLossTransientCanDuckListener: AudioFocusLossTransientCanDuck? = null
+    var audioFocusGainListener: OnAudioFocusGainListener? = null
+    var audioFocusLossListener: OnAudioFocusLossListener? = null
+    var audioFocusLossTransientListener: OnAudioFocusLossTransientListener? = null
+    var audioFocusLossTransientCanDuckListener: OnAudioFocusLossTransientCanDuck? = null
 
     private var audioManager: AudioManager? = null
     private lateinit var audioFocusRequest: AudioFocusRequest
@@ -78,19 +78,19 @@ class AudioFocusManager constructor(context: Context) : AudioManager.OnAudioFocu
     @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.O)
     private fun isAtLeastO(): Boolean = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
 
-    interface AudioFocusGainListener {
+    interface OnAudioFocusGainListener {
         fun onAudioFocusGain()
     }
 
-    interface AudioFocusLossListener {
+    interface OnAudioFocusLossListener {
         fun onAudioFocusLoss()
     }
 
-    interface AudioFocusLossTransientListener {
+    interface OnAudioFocusLossTransientListener {
         fun onAudioFocusLossTransient()
     }
 
-    interface AudioFocusLossTransientCanDuck {
+    interface OnAudioFocusLossTransientCanDuck {
         fun onAudioFocusLossTransientCanDuck()
     }
 }
