@@ -112,6 +112,14 @@ class PlayerService @Inject constructor() : Service(),
         unregisterReceiver(becomeNoisyReceiver)
     }
 
+    fun changeState(state: MediaPlayerState) {
+        this.playerState = state
+    }
+
+    fun getMediaPlayerState(): MediaPlayerState {
+        return playerState
+    }
+
     private fun playMedia() {
         //we should add requestAudioFocus
         mediaPlayer?.run {
