@@ -107,6 +107,18 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:padding="@dimen/small_50"
             android:src="@drawable/ic_baseline_skip_next_48"
+            app:layout_constraintBottom_toBottomOf="@+id/forward"
+            app:layout_constraintLeft_toRightOf="@+id/forward"
+            app:layout_constraintTop_toTopOf="@+id/forward" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/forward"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="@dimen/small_100"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="@dimen/small_50"
+            android:src="@drawable/ic_baseline_forward_30_48"
             app:layout_constraintBottom_toBottomOf="@+id/play"
             app:layout_constraintLeft_toRightOf="@+id/play"
             app:layout_constraintTop_toTopOf="@+id/play" />
@@ -125,6 +137,18 @@
             app:layout_constraintVertical_bias="0.97" />
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/replay"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="@dimen/small_100"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="@dimen/small_50"
+            android:src="@drawable/ic_baseline_replay_30_48"
+            app:layout_constraintBottom_toBottomOf="@+id/play"
+            app:layout_constraintRight_toLeftOf="@+id/play"
+            app:layout_constraintTop_toTopOf="@+id/play" />
+
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/previous"
             android:layout_width="48dp"
             android:layout_height="48dp"
@@ -132,9 +156,9 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:padding="@dimen/small_50"
             android:src="@drawable/ic_baseline_skip_previous_48"
-            app:layout_constraintBottom_toBottomOf="@+id/play"
-            app:layout_constraintRight_toLeftOf="@+id/play"
-            app:layout_constraintTop_toTopOf="@+id/play" />
+            app:layout_constraintBottom_toBottomOf="@+id/replay"
+            app:layout_constraintRight_toLeftOf="@+id/replay"
+            app:layout_constraintTop_toTopOf="@+id/replay" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
