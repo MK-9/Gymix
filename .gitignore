@@ -87,3 +87,6 @@ lint/tmp/
 
 # Android Profiling
 *.hprof
+keystore/gymix-keystore.jks
+app/release/output-metadata.json
+.idea/misc.xml
