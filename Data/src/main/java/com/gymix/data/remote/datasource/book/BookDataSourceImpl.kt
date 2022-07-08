@@ -1,7 +1,7 @@
 package com.gymix.data.remote.datasource.book
 
 import com.gymix.common.utils.network.RemoteStatus
-import com.gymix.data.remote.api.BookServices
+import com.gymix.data.remote.api.BookApi
 import com.gymix.data.utils.DispatcherProvider
 import com.gymix.data.utils.safeApiCall
 import com.gymix.domain.entities.DomainBookResponse
@@ -9,7 +9,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class BookDataSourceImpl @Inject constructor(
-    private val service: BookServices,
+    private val service: BookApi,
     private val dispatcher: DispatcherProvider
 ) : BookDataSource {
 

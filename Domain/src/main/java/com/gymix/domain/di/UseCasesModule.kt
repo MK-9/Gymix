@@ -14,4 +14,7 @@ import javax.inject.Singleton
 abstract class UseCasesModule {
     @Binds
     abstract fun provideGetBookUseCase(book: GetBookInteractor): GetBookUseCase
+
+    @Binds
+    abstract fun provideGetApiTokenUseCase(book: GetApiTokenInteractor): GetApiTokenUseCase
 }

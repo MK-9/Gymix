@@ -30,9 +30,9 @@ class ApiConfig {
     fun provideWritingTime(): Long = WRITING_TIME
 
     companion object {
-        const val READING_TIME = 2000L
-        const val WRITING_TIME = 2000L
+        const val READING_TIME = 10000L
+        const val WRITING_TIME = 10000L
         const val BOOK_BASE_URL = "https://get.taaghche.com/"
-        const val SPOTIFY_BASE_URL = "https://get.taaghche.com/"
+        const val SPOTIFY_BASE_URL = "https://accounts.spotify.com/"
     }
 }

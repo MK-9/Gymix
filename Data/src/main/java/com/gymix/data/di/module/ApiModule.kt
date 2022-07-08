@@ -19,26 +19,26 @@ class ApiModule {
     @BookRetrofitQualifier
     @Provides
     fun provideBooksRetrofit(
-        @BookBaseUrlQualifier baseUrl: String, okHttpClient: OkHttpClient
+        @BookBaseUrlQualifier baseUrl: String, @BookOkHttpQualifier okHttpClient: OkHttpClient
     ): Retrofit = Retrofit.Builder()
         .client(okHttpClient)
         .baseUrl(baseUrl)
         .addConverterFactory(GsonConverterFactory.create())
-//        .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
         .build()
 
     @SpotifyRetrofitQualifier
     @Provides
     fun provideSpotifyRetrofit(
-        @SpotifyBaseUrlQualifier baseUrl: String, okHttpClient: OkHttpClient
+        @SpotifyBaseUrlQualifier baseUrl: String, @SpotifyOkHttpQualifier okHttpClient: OkHttpClient
     ): Retrofit = Retrofit.Builder()
         .client(okHttpClient)
         .baseUrl(baseUrl)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
+    @BookOkHttpQualifier
     @Provides
-    fun provideOkHttp(
+    fun provideBookOkHttp(
         @ReadingTimeQualifier readTimeout: Long,
         @WritingTimeQualifier writeTimeout: Long,
         @HttpLoggingInterceptorQualifier interceptor: Interceptor
@@ -49,11 +49,31 @@ class ApiModule {
         .addInterceptor(interceptor)
         .build()
 
+    @SpotifyOkHttpQualifier
+    @Provides
+    fun provideSpotifyOkHttp(
+        @ReadingTimeQualifier readTimeout: Long,
+        @WritingTimeQualifier writeTimeout: Long,
+        @HttpLoggingInterceptorQualifier loggingInterceptor: Interceptor,
+        @SpotifyInterceptorQualifier spotifyInterceptor: Interceptor
+    ): OkHttpClient = OkHttpClient.Builder()
+        .readTimeout(readTimeout, TimeUnit.MILLISECONDS)
+        .writeTimeout(writeTimeout, TimeUnit.MILLISECONDS)
+        .callTimeout(writeTimeout, TimeUnit.MILLISECONDS)
+        .addInterceptor(loggingInterceptor)
+        .addInterceptor(spotifyInterceptor)
+        .build()
+
     @HttpLoggingInterceptorQualifier
     @Provides
-    fun provideInterceptor(): Interceptor =
+    fun provideHttpLoggingInterceptor(): Interceptor =
         HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }
+
+    @SpotifyInterceptorQualifier
+    @Provides
+    fun provideSpotifyInterceptor(): Interceptor =
+        SpotifyApiInterceptor()
 
 }

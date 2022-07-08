@@ -5,5 +5,5 @@ import com.gymix.domain.entities.spotify.DomainAuthKeyRequest
 import com.gymix.domain.entities.spotify.DomainAuthKeyResponse
 
 interface SpotifyDataSource {
-    suspend fun getApiToken(header:String, request: DomainAuthKeyRequest): RemoteStatus<DomainAuthKeyResponse>
+    suspend fun getApiToken(header: String, grant_type: String): RemoteStatus<DomainAuthKeyResponse>
 }

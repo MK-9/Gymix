@@ -36,23 +36,39 @@ class StoreFragment : Fragment() {
 
         lifecycleScope.launch {
             repeatOnLifecycle(state = Lifecycle.State.STARTED) {
-                viewModel.fetchBooks().collect { result ->
+//                viewModel.fetchBooks().collect { result ->
+//                    when (result) {
+//                        is RemoteStatus.Loading -> {
+//                            binding.prgMain.isVisible = result.state
+//                        }
+//
+//                        is RemoteStatus.Success -> {
+////                            binding.rcv1.isVisible = true
+//                            binding.rcv2.isVisible = true
+//                            gridBookListAdapter?.submitList(result.data?.bookList?.books)
+////                            bookListAdapter1?.submitList(result.data?.bookList?.books)
+////                            bookListAdapter2?.submitList(result.data?.bookList?.books)
+//                        }
+//
+//                        is RemoteStatus.Error -> {
+//                            binding.rcv1.isVisible = false
+////                            binding.rcv2.isVisible = false
+//                        }
+//                    }
+//                }
+
+                viewModel.getApiToken().collect { result ->
                     when (result) {
                         is RemoteStatus.Loading -> {
                             binding.prgMain.isVisible = result.state
                         }
 
                         is RemoteStatus.Success -> {
-//                            binding.rcv1.isVisible = true
                             binding.rcv2.isVisible = true
-                            gridBookListAdapter?.submitList(result.data?.bookList?.books)
-//                            bookListAdapter1?.submitList(result.data?.bookList?.books)
-//                            bookListAdapter2?.submitList(result.data?.bookList?.books)
                         }
 
                         is RemoteStatus.Error -> {
                             binding.rcv1.isVisible = false
-//                            binding.rcv2.isVisible = false
                         }
                     }
                 }
