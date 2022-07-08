@@ -2,7 +2,7 @@ package com.gymix.data.repository
 
 import com.gymix.domain.repository.BookRepository
 import com.gymix.common.utils.network.RemoteStatus
-import com.gymix.data.datasource.BookDataSource
+import com.gymix.data.remote.datasource.book.BookDataSource
 import com.gymix.data.utils.DispatcherProvider
 import com.gymix.domain.entities.DomainBookResponse
 import kotlinx.coroutines.withContext

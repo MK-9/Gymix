@@ -1,7 +1,6 @@
-package com.gymix.data.datasource
+package com.gymix.data.remote.datasource.book
 
 import com.gymix.common.utils.network.RemoteStatus
-import retrofit2.Response
 import com.gymix.domain.entities.DomainBookResponse
 
 interface BookDataSource {

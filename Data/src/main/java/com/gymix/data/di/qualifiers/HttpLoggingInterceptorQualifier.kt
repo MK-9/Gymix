@@ -1,4 +1,4 @@
-package com.gymix.data.network.di.qualifiers
+package com.gymix.data.di.qualifiers
 
 import javax.inject.Qualifier
 

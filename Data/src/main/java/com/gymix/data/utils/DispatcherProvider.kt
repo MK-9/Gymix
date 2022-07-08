@@ -10,5 +10,3 @@ interface DispatcherProvider {
     fun default(): CoroutineDispatcher = Dispatchers.Default
     fun unconfined(): CoroutineDispatcher = Dispatchers.Unconfined
 }
-
-class DefaultDispatchersProvider @Inject constructor() : DispatcherProvider

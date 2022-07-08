@@ -1,4 +1,4 @@
-package com.gymix.data.database.di
+package com.gymix.data.di.module
 
 import dagger.Module
 import dagger.hilt.InstallIn
