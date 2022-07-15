@@ -4,4 +4,4 @@ import javax.inject.Qualifier
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
-annotation class SpotifyRetrofitQualifier
+annotation class MusicApiRetrofitQualifier

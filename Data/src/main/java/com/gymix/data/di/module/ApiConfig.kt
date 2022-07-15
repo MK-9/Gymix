@@ -2,7 +2,7 @@ package com.gymix.data.di.module
 
 import com.gymix.data.di.qualifiers.BookBaseUrlQualifier
 import com.gymix.data.di.qualifiers.ReadingTimeQualifier
-import com.gymix.data.di.qualifiers.SpotifyBaseUrlQualifier
+import com.gymix.data.di.qualifiers.MusicApiBaseUrlQualifier
 import com.gymix.data.di.qualifiers.WritingTimeQualifier
 import dagger.Module
 import dagger.Provides
@@ -17,9 +17,9 @@ class ApiConfig {
     @Provides
     fun provideBookBaseUrl(): String = BOOK_BASE_URL
 
-    @SpotifyBaseUrlQualifier
+    @MusicApiBaseUrlQualifier
     @Provides
-    fun provideSpotifyBaseUrl(): String = SPOTIFY_BASE_URL
+    fun provideMusicApiBaseUrl(): String = MUSIC_API_BASE_URL
 
     @ReadingTimeQualifier
     @Provides
@@ -33,6 +33,6 @@ class ApiConfig {
         const val READING_TIME = 10000L
         const val WRITING_TIME = 10000L
         const val BOOK_BASE_URL = "https://get.taaghche.com/"
-        const val SPOTIFY_BASE_URL = "https://accounts.spotify.com/"
+        const val MUSIC_API_BASE_URL = "https://api.taaghche.com/mybook/v2/order/book"
     }
 }

@@ -1,9 +1,9 @@
 package com.gymix.data.di.module
 
 import com.gymix.data.di.qualifiers.BookRetrofitQualifier
-import com.gymix.data.di.qualifiers.SpotifyRetrofitQualifier
+import com.gymix.data.di.qualifiers.MusicApiRetrofitQualifier
 import com.gymix.data.remote.api.BookApi
-import com.gymix.data.remote.api.SpotifyApi
+import com.gymix.data.remote.api.MusicApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,7 +22,7 @@ class ApiService {
 
     @Provides
     @Singleton
-    fun provideSpotifyService(@SpotifyRetrofitQualifier retrofit: Retrofit): SpotifyApi =
-        retrofit.create(SpotifyApi::class.java)
+    fun provideMusicApiService(@MusicApiRetrofitQualifier retrofit: Retrofit): MusicApi =
+        retrofit.create(MusicApi::class.java)
 
 }

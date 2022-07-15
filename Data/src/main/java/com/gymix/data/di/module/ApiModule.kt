@@ -26,10 +26,10 @@ class ApiModule {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    @SpotifyRetrofitQualifier
+    @MusicApiRetrofitQualifier
     @Provides
     fun provideSpotifyRetrofit(
-        @SpotifyBaseUrlQualifier baseUrl: String, @SpotifyOkHttpQualifier okHttpClient: OkHttpClient
+        @MusicApiBaseUrlQualifier baseUrl: String, @MusicApiOkHttpQualifier okHttpClient: OkHttpClient
     ): Retrofit = Retrofit.Builder()
         .client(okHttpClient)
         .baseUrl(baseUrl)
@@ -49,19 +49,19 @@ class ApiModule {
         .addInterceptor(interceptor)
         .build()
 
-    @SpotifyOkHttpQualifier
+    @MusicApiOkHttpQualifier
     @Provides
     fun provideSpotifyOkHttp(
         @ReadingTimeQualifier readTimeout: Long,
         @WritingTimeQualifier writeTimeout: Long,
         @HttpLoggingInterceptorQualifier loggingInterceptor: Interceptor,
-        @SpotifyInterceptorQualifier spotifyInterceptor: Interceptor
+        @MusicApiInterceptorQualifier musicApiInterceptor: Interceptor
     ): OkHttpClient = OkHttpClient.Builder()
         .readTimeout(readTimeout, TimeUnit.MILLISECONDS)
         .writeTimeout(writeTimeout, TimeUnit.MILLISECONDS)
         .callTimeout(writeTimeout, TimeUnit.MILLISECONDS)
         .addInterceptor(loggingInterceptor)
-        .addInterceptor(spotifyInterceptor)
+        .addInterceptor(musicApiInterceptor)
         .build()
 
     @HttpLoggingInterceptorQualifier
@@ -71,9 +71,9 @@ class ApiModule {
             level = HttpLoggingInterceptor.Level.BODY
         }
 
-    @SpotifyInterceptorQualifier
+    @MusicApiInterceptorQualifier
     @Provides
     fun provideSpotifyInterceptor(): Interceptor =
-        SpotifyApiInterceptor()
+        MusicApiInterceptor()
 
 }
