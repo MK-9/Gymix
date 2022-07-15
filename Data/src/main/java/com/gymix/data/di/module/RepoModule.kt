@@ -1,11 +1,11 @@
 package com.gymix.data.di.module
 
 import com.gymix.data.repository.DefaultBookRepository
-import com.gymix.data.repository.DefaultSpotifyRepository
+import com.gymix.data.repository.DefaultMusicApiRepository
 import com.gymix.data.utils.DefaultDispatchersProvider
 import com.gymix.data.utils.DispatcherProvider
 import com.gymix.domain.repository.BookRepository
-import com.gymix.domain.repository.SpotifyRepository
+import com.gymix.domain.repository.MusicApiRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -22,5 +22,5 @@ abstract class RepoModule {
     abstract fun provideBookRepository(repository: DefaultBookRepository): BookRepository
 
     @Binds
-    abstract fun provideSpotifyRepository(repository: DefaultSpotifyRepository): SpotifyRepository
+    abstract fun provideSpotifyRepository(repository: DefaultMusicApiRepository): MusicApiRepository
 }
