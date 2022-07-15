@@ -33,6 +33,6 @@ class ApiConfig {
         const val READING_TIME = 10000L
         const val WRITING_TIME = 10000L
         const val BOOK_BASE_URL = "https://get.taaghche.com/"
-        const val MUSIC_API_BASE_URL = "https://api.taaghche.com/mybook/v2/order/book"
+        const val MUSIC_API_BASE_URL = "https://api.taaghche.com/mybook/v2/"
     }
 }

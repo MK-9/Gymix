@@ -2,7 +2,7 @@ package com.gymix.store
 
 import androidx.lifecycle.ViewModel
 import com.gymix.common.utils.network.RemoteStatus
-import com.gymix.domain.useCase.GetApiTokenUseCase
+import com.gymix.domain.useCase.GetTrackUseCase
 import com.gymix.domain.useCase.GetBookUseCase
 import com.gymix.presentation.book.mappers.map
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,7 +13,7 @@ import javax.inject.Inject
 @HiltViewModel
 class BookListViewModel @Inject constructor(
     private val usecase: GetBookUseCase,
-    private val getApiTokenUseCase: GetApiTokenUseCase
+    private val getTrackUseCase: GetTrackUseCase
 ) : ViewModel() {
 
     fun fetchBooks() = flow {
@@ -33,13 +33,13 @@ class BookListViewModel @Inject constructor(
         }
     }
 
-    fun getApiToken() = flow {
+    fun getTrack() = flow {
         emit(RemoteStatus.Loading(true))
 
         delay(1000)
 
-        when (val result = getApiTokenUseCase.invoke()) {
-            is RemoteStatus.Loading -> {
+        when (val result = getTrackUseCase.invoke()) {
+            is RemoteStatus.Success -> {
                 emit(RemoteStatus.Loading(false))
                 emit(RemoteStatus.Success(result.data))
             }

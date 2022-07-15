@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -57,14 +58,21 @@ class StoreFragment : Fragment() {
 //                    }
 //                }
 
-                viewModel.getApiToken().collect { result ->
+                viewModel.getTrack().collect { result ->
                     when (result) {
                         is RemoteStatus.Loading -> {
                             binding.prgMain.isVisible = result.state
                         }
 
                         is RemoteStatus.Success -> {
+                            binding.prgMain.isVisible = false
                             binding.rcv2.isVisible = true
+
+                            Toast.makeText(
+                                activity,
+                                result.data?.tracks?.get(0)?.link ?: "",
+                                Toast.LENGTH_LONG
+                            ).show()
                         }
 
                         is RemoteStatus.Error -> {
