@@ -26,6 +26,8 @@ class BookListViewModel @Inject constructor(private val usecase: GetBookUseCase)
                 emit(RemoteStatus.Loading(false))
                 emit(RemoteStatus.Error(result.message))
             }
+
+            else->{}
         }
     }
 
