@@ -59,7 +59,7 @@ dependencies {
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.activity:activity-ktx:1.4.0'
-    implementation 'androidx.fragment:fragment-ktx:1.4.0'
+    implementation 'androidx.fragment:fragment-ktx:1.5.3'
 
     //retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
