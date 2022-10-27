@@ -1,5 +1,6 @@
 package com.gymix.training
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
@@ -15,13 +16,23 @@ class MainActivity : AppCompatActivity() {
     private val navHostFragment by lazy { createNavHostFragment() }
     private val navController: NavController by lazy { createNavController() }
 
-    lateinit var binding: ActivityMainBinding
+    private var _binding: ActivityMainBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        _binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         NavigationUI.setupWithNavController(binding.bottomNavigation, navController)
+
+        binding.login.setOnClickListener {
+            Intent(
+                this@MainActivity,
+                GymixActivity::class.java
+            ).run {
+                startActivity(this)
+            }
+        }
     }
 
     private fun createNavHostFragment(): NavHostFragment {

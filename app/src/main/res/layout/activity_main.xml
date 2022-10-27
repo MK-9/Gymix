@@ -10,9 +10,9 @@
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/container"
-            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="0dp">
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
             <com.google.android.material.appbar.AppBarLayout
                 android:id="@+id/appBar"
@@ -31,6 +31,12 @@
                 app:defaultNavHost="true"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 app:navGraph="@navigation/bottom_nav_graph" />
+
+            <Button
+                android:id="@+id/login"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:text="login" />
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
