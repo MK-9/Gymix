@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import com.gymix.training.alarm.ReminderService
 import com.gymix.training.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,12 +27,11 @@ class MainActivity : AppCompatActivity() {
         NavigationUI.setupWithNavController(binding.bottomNavigation, navController)
 
         binding.login.setOnClickListener {
-            Intent(
-                this@MainActivity,
-                GymixActivity::class.java
-            ).run {
-                startActivity(this)
-            }
+            ReminderService.execute(this@MainActivity, ReminderService.ACTION_SET_ALARM, 1)
+        }
+
+        binding.logout.setOnClickListener {
+            ReminderService.execute(this@MainActivity, ReminderService.ACTION_CANCEL_ALARM, 1)
         }
     }
 

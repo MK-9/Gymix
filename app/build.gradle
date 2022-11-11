@@ -158,6 +158,9 @@ dependencies {
 
     testImplementation "androidx.test:core:$androidXTestVersion"
 
+    // For Robolectric tests.
+    testImplementation "com.google.dagger:hilt-android-testing:2.28-alpha"
+
     // Optional -- Mockito framework
     testImplementation "org.mockito:mockito-core:$mockitoVersion"
 
