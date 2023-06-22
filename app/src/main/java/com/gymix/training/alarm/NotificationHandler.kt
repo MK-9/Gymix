@@ -11,7 +11,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.gymix.training.R
 
-class NotificationHandler constructor(val context: Context){
+class NotificationHandler constructor(val context: Context) {
 
     private var _notificationManager: NotificationManager? = null
     private val notificationManager: NotificationManager get() = _notificationManager!!
@@ -63,24 +63,19 @@ class NotificationHandler constructor(val context: Context){
     }
 
     private fun getPendingIntent(action: Int): PendingIntent {
-        when (action) {
-            EDIT_REMINDER -> {
-
-            }
-
-            POSTPONE_REMINDER -> {
-
-            }
-
-            NOTIF_DISMISS -> {
-                val intent = Intent(context, ReminderService::class.java)
-                intent.action = ReminderService.ACTION_CANCEL_ALARM
-            }
-
-            OPEN_APP -> {
-
-            }
+        val intent = Intent(context, ReminderService::class.java)
+        intent.action = ReminderService.ACTION_CANCEL_ALARM
+        val pendingIntent = if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+            PendingIntent.getBroadcast(
+                context,
+                123,
+                intent,
+                PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+            )
+        } else {
+            PendingIntent.getBroadcast(context, 123, intent, PendingIntent.FLAG_UPDATE_CURRENT)
         }
+        return pendingIntent
     }
 
     companion object {

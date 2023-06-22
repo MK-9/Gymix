@@ -18,16 +18,20 @@
         <activity
             android:name=".GymixActivity"
             android:label="@string/title_activity_gymix"
-            android:theme="@style/Theme.Gymix" />
-
-        <activity
-            android:name=".MainActivity"
+            android:theme="@style/Theme.Gymix"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+
         </activity>
 
         <service

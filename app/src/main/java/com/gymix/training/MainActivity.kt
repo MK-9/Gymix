@@ -24,15 +24,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         _binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        NavigationUI.setupWithNavController(binding.bottomNavigation, navController)
-
-        binding.login.setOnClickListener {
-            ReminderService.execute(this@MainActivity, ReminderService.ACTION_SET_ALARM, 1)
-        }
-
-        binding.logout.setOnClickListener {
-            ReminderService.execute(this@MainActivity, ReminderService.ACTION_CANCEL_ALARM, 1)
-        }
+//        NavigationUI.setupWithNavController(binding.bottomNavigation, navController)
+//
+//        binding.login.setOnClickListener {
+//            ReminderService.execute(this@MainActivity, ReminderService.ACTION_SET_ALARM, 1)
+//        }
+//
+//        binding.logout.setOnClickListener {
+//            ReminderService.execute(this@MainActivity, ReminderService.ACTION_CANCEL_ALARM, 1)
+//        }
     }
 
     private fun createNavHostFragment(): NavHostFragment {
