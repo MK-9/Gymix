@@ -35,7 +35,7 @@ class StoreFragment : Fragment() {
     ): View {
         binding = FragmentBookListBinding.inflate(inflater)
 
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(state = Lifecycle.State.STARTED) {
                 viewModel.fetchBooks().collect { result ->
                     when (result) {

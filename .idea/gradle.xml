@@ -17,11 +17,12 @@
             <option value="$PROJECT_DIR$/Features" />
             <option value="$PROJECT_DIR$/Features/Bookmark" />
             <option value="$PROJECT_DIR$/Features/Store" />
+            <option value="$PROJECT_DIR$/Features/Survey" />
             <option value="$PROJECT_DIR$/Presentation" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/buildSrc" />
           </set>
         </option>
-        <option name="resolveModulePerSourceSet" value="false" />
       </GradleProjectSettings>
     </option>
   </component>
